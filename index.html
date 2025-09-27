@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بانک مدرن</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- هدر -->
+  <header class="header">
+    <div class="logo">بانک مدرن</div>
+    <nav class="nav">
+      <ul>
+        <li><a href="#">خانه</a></li>
+        <li><a href="#">خدمات</a></li>
+        <li><a href="#">تماس با ما</a></li>
+        <li><a href="dashboard.html">داشبورد</a></li>
+      </ul>
+    </nav>
+    <div class="menu-toggle">&#9776;</div>
+  </header>
+
+  <!-- بنر -->
+  <section class="hero">
+    <h1>بانکداری آسان و مدرن</h1>
+    <p>با بانک مدرن، آینده مالی خود را بسازید.</p>
+    <a href="#" class="btn">افتتاح حساب</a>
+  </section>
+
+  <!-- خدمات -->
+  <section class="services">
+    <h2>خدمات ما</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>وام</h3>
+        <p>وام‌های متنوع با شرایط ویژه برای نیازهای شما.</p>
+      </div>
+      <div class="card">
+        <h3>پس‌انداز</h3>
+        <p>حساب‌های پس‌انداز با سود مطمئن و امنیت بالا.</p>
+      </div>
+      <div class="card">
+        <h3>کارت اعتباری</h3>
+        <p>کارت‌های اعتباری مدرن با خدمات ویژه مشتریان.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ورود کاربر -->
+  <section class="login">
+    <h2>ورود به حساب کاربری</h2>
+    <form>
+      <input type="text" placeholder="نام کاربری" required>
+      <input type="password" placeholder="رمز عبور" required>
+      <button type="submit" class="btn">ورود</button>
+    </form>
+  </section>
+
+  <!-- فوتر -->
+  <footer class="footer">
+    <p>تماس با ما: ۰۲۱-۱۲۳۴۵۶۷۸ | ایمیل: info@modernbank.ir</p>
+    <p>© ۲۰۲۵ بانک مدرن</p>
+  </footer>
+
+  <script>
+    // منوی همبرگری
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav ul');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+  </script>
+  
+  <script src="main.js"></script>
+
+</body>
+</html>
