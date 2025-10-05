@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>بانک مدرن</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
   <!-- هدر -->
@@ -47,7 +47,7 @@
     </div>
   </section>
 
-  <!-- ورود کاربر -->
+  <!-- login -->
   <section class="login">
     <h2>ورود به حساب کاربری</h2>
     <form>
@@ -55,6 +55,20 @@
       <input type="password" placeholder="رمز عبور" required>
       <button type="submit" class="btn">ورود</button>
     </form>
+    <p>حساب کاربری ندارید؟ <a href="#">ساخت حساب</a></p>
+  </section>
+
+
+  <!-- create-account -->
+  <section class="create-account">
+    <h2>ساخت حساب کاربری</h2>
+    <form>
+      <input type="text" placeholder="نام کاربری" required>
+      <input type="email" placeholder="ایمیل" required>
+      <input type="password" placeholder="رمز عبور" required>
+      <button type="submit" class="btn">ساخت حساب</button>
+    </form>
+    <p>حساب کاربری دارید؟ <a href="#">ورود</a></p>
   </section>
 
   <!-- فوتر -->
@@ -72,7 +86,7 @@
     });
   </script>
   
-  <script src="main.js"></script>
+  <script type="module" src="scripts/main.js"></script>
 
 </body>
 </html>

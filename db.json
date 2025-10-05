@@ -1,0 +1,20 @@
+
+{
+    "banks" :[
+        {
+            "id":1 ,
+            "name" : "saderat",
+            "accounts":[]
+        },
+        {
+            "id":2 ,
+            "name" : "mellat",
+            "accounts":[]
+        },
+        {
+            "id":3 ,
+            "name" : "tejarat",
+            "accounts":[]
+        }
+    ]
+}

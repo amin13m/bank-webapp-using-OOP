@@ -98,22 +98,42 @@ body {
   max-width: 300px;
 }
 
-/* ورود */
+/* login */
 .login {
   padding: 50px 20px;
   text-align: center;
+  
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
 }
-.login form {
-  max-width: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.login input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+
+/* create-account */
+.create-account {
+  display: none;
+  padding: 50px 20px;
+  text-align: center;
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
 }
 
 /* داشبورد */
