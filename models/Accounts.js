@@ -1,55 +1,62 @@
-import BankUtils from "./BankUtils.js"
 
-class BankAccount  {
+import { Transaction } from "./Transaction.js"
+
+
+export class BankAccount  {
     #id
     #password
     #balence
-    #transactions =[]
-    constructor(name , password , balence = 0){
+    #bankId
+    static #ID
+    static #transactions=[]
+    constructor(id  = BankAccount.generateId(),owner , password , balence = 0 , bankId = null){
         if(new.target === BankAccount){
             throw new Error("you cant make obj using this class")
         }
-        this.name = name;
+        this.#id = id
+        this.owner = owner;
         this.#password = password;
         this.#balence = balence;
-        this.#id = BankUtils.generateId()
+        this.#bankId =bankId
     }
 
-    diposit(from , amount ){
-        let to = this.#id
-        if(amount>0 ){
-            this.#balence += amount;
-            from.balence -= amount
-            this.#addTransaction("diposit",from , to , amount)
-        }else{
-            console.log("مبلغ واریزی صحیح نیست");
+
+    get id(){return this.#id}
+    get balence(){return this.#balence}
+    get bankId(){return this.#bankId}    
+     
+    toJSON(){
+        return {id : this.#id , owner : this.owner , password : this.#password , balence : this.#balence , bankId : this.#bankId,
+             _type : this.constructor.name
         }
     }
 
-    withdrow( to , amount ){
-        let from = this.#id 
-        if(amount >0 && amount <= this.#balence){
+    static fromJSON(obj){
+       if(obj._type === "SavingAccount"){
+            return new SavingAccount(obj.id , obj.owner , obj.password , obj.balence , obj.bankId )
+        }else if(obj._type === "CheckingAccount"){
+            return new CheckingAccount(obj.id , obj.owner , obj.password , obj.balence , obj.bankId )
+        } 
+    }
+
+    deposit(amount ){
+        if(amount>0){
+            this.#balence+=amount
+        }
+    }
+
+    withdraw( amount ){
+        if(amount >0 && amount <= this.balence){
             this.#balence -= amount
-            to.balence += amount
-            this.#addTransaction("withdrow",from , to , amount)
         }else{
             console.log("مبلغ واریزی صحیح نیست");
         }
     }
 
-    get balence(){
-        return this.#balence
+    update(data){
+        Object.assign(this,data)
     }
-
-    set balence(amount){
-        if(amount >0){
-                this.#balence = amount    
-        }
-    }
-
-    get id(){
-        return this.#id
-    }
+    
     
     calculateInterest(){
         throw new Error("this method must be overriden")
@@ -60,37 +67,30 @@ class BankAccount  {
     }
 
 
-    static Transaction = class{
-        constructor(type ,from , to , amount , date = new Date()){
-            this.type = type
-            this.from = from
-            this.to = to
-            this.amount = amount
-            this.date = date
-        }
-
-        info(){
-            console.log(`مبلغ ${this.amount} ریال از ${this.from.name} به ${this.to.name} واریز شد`)
-        }
+   static generateId(){ 
+      let id = `AC_${new Date()}`
+      return id.replace(/\s+/g,"")
     }
 
-    
-    #addTransaction(type ,from , to , amount ){
-        let transaction = new BankAccount.Transaction(type ,from , to , amount)
-        this.#transactions.push(transaction)
+
+    get accTansactions(){
+        return BankAccount.#transactions
     }
 
-    get tansactions(){
-        return this.#transactions
+    get allTransactions(){
+        BankAccount.#transactions = BankAPI.deserialize(BankAPI.getTransactions())
+        return BankAccount.#transactions
     }
+
+
 
 }
 
 
 
-export class savingAccount extends BankAccount{
-    constructor(name , password , balence){
-        super(name , password , balence)
+export class SavingAccount extends BankAccount{
+    constructor(id , owner , password , balence , bankId ){
+        super(id , owner , password , balence , bankId )
     }
     calculateInterest(){
         return this.balence * 0.05
@@ -98,9 +98,9 @@ export class savingAccount extends BankAccount{
 }
 
 
-export class checkingAccount extends BankAccount{
-    constructor(name , password , balence){
-        super(name , password , balence)
+export class CheckingAccount extends BankAccount{
+    constructor(id , owner , password , balence , bankId ){
+        super(id , owner , password , balence , bankId )
     }
     calculateInterest(){
         return this.balence * 0.01

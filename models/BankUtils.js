@@ -1,4 +1,4 @@
-
+import { Bank } from "./Bank.js"
 export default class BankUtils{
 
     static generateId(){ 

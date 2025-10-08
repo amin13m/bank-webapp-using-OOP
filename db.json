@@ -1,20 +1,96 @@
-
 {
-    "banks" :[
-        {
-            "id":1 ,
-            "name" : "saderat",
-            "accounts":[]
-        },
-        {
-            "id":2 ,
-            "name" : "mellat",
-            "accounts":[]
-        },
-        {
-            "id":3 ,
-            "name" : "tejarat",
-            "accounts":[]
-        }
-    ]
+  "banks": [
+    {
+      "id": "ba1",
+      "name": "mellat"
+    },
+    {
+      "id": "ba2",
+      "name": "saderat"
+    },
+    {
+      "id": "ba3",
+      "name": "ayande"
+    },
+    {
+      "id": "ba4",
+      "name": "sepehr"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "ac1",
+      "owner": "ali",
+      "password": 1234,
+      "balence": 12090,
+      "bankId": "ba3",
+      "_type": "SavingAccount"
+    },
+    {
+      "id": "ac2",
+      "owner": "ahmad",
+      "password": "1234",
+      "balence": 10570,
+      "bankId": "ba1",
+      "_type": "CheckingAccount"
+    },
+    {
+      "id": "ac3",
+      "owner": "ali",
+      "password": "1234",
+      "balence": 3060,
+      "bankId": "ba1",
+      "_type": "CheckingAccount"
+    },
+    {
+      "id": "ac4",
+      "owner": "reza",
+      "password": "1234",
+      "balence": 10000,
+      "bankId": "ba2",
+      "_type": "SavingAccount"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "TA_TueOct07202508:56:00GMT-0700(PacificDaylightTime)",
+      "fromID": "ac2",
+      "toID": "ac1",
+      "amount": 190,
+      "date": "2025-10-07T15:56:00.718Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_TueOct07202508:56:04GMT-0700(PacificDaylightTime)",
+      "fromID": "ac3",
+      "toID": "ac1",
+      "amount": 190,
+      "date": "2025-10-07T15:56:04.171Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_TueOct07202508:56:52GMT-0700(PacificDaylightTime)",
+      "fromID": "ac3",
+      "toID": "ac1",
+      "amount": 190,
+      "date": "2025-10-07T15:56:52.486Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_WedOct08202506:53:32GMT-0700(PacificDaylightTime)",
+      "fromID": "ac3",
+      "toID": "ac1",
+      "amount": 190,
+      "date": "2025-10-08T13:53:32.577Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_WedOct08202507:56:01GMT-0700(PacificDaylightTime)",
+      "fromID": "ac3",
+      "toID": "ac1",
+      "amount": 190,
+      "date": "2025-10-08T14:56:01.771Z",
+      "_type": "Transaction"
+    }
+  ]
 }
