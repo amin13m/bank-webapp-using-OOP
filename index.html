@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,12 +15,49 @@
         <button data-section="accounts">حساب‌ها</button>
         <button data-section="transactions">تراکنش‌ها</button>
         <button data-section="transfer">انتقال وجه</button>
+        <button data-section="login">ورود</button>
       </nav>
       <button id="menuBtn" class="menu-btn">☰</button>
     </header>
 
     <!--  Main -->
     <main>
+
+      <section id="login" class="active">
+        <h2>ورود به حساب</h2>
+        <form id="loginForm" class="login-form">
+          <div class="form-group">
+            <label for="username">نام کاربری:</label>
+            <input placeholder="username" type="text" class="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">رمز عبور:</label>
+            <input placeholder="password" type="password" class="password" name="password" required />
+          </div>
+          <button type="submit">ورود</button>
+        </form>
+        <span>حساب کاربری ندارید؟ <a data-section="createAccount">ثبت نام کنید</a></span>
+      </section>
+      <section id="createAccount" class="hidden">
+        <h2>ثبت نام</h2>
+        <form id="createAccountForm" class="create-account-form">
+          <div class="form-group">
+            <label for="email">ایمیل:</label>
+            <input placeholder="email" type="email" class="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="username">نام کاربری:</label>
+            <input placeholder="username" type="text" class="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">رمز عبور:</label>
+            <input placeholder="password" type="password" class="password" name="password" required />
+          </div>
+          <button type="submit">ثبت نام</button>
+        </form>
+        <span>حساب کاربری دارید؟ <a data-section="login">ورود</a></span>
+      </section>
+
       <section id="dashboard" class="active">
         <h2>انتخاب بانک</h2>
         <select id="bankSelect">

@@ -4,7 +4,9 @@
 const BASE_URL = "http://localhost:3000";
 
 export const BankAPI = {
-  ///banks
+
+
+  //////////BANK////////
 
   async getBanks() {
     const res = await fetch(`${BASE_URL}/banks`);
@@ -40,7 +42,7 @@ export const BankAPI = {
 
 
 
-///accounts
+//////////ACCOUNTS////////
   async getAccounts() {
     const res = await fetch(`${BASE_URL}/accounts`);
     return await res.json();
@@ -81,7 +83,7 @@ export const BankAPI = {
   },
 
 
-  ///transactions
+  ///////TRANSATIONS///////
   async getAllTransactions() {
     const res = await fetch(`${BASE_URL}/transactions`);
     return await res.json();
@@ -103,6 +105,36 @@ export const BankAPI = {
     return await res.json();
   },
 
+
+
+  ////////USER///////
+
+  async getUserById(userId){
+    let res =  fetch(`${BASE_URL}/users/${userId}`)
+    return await res.json()
+  },
+
+  async getAllUsers(user){
+    return await fetch(`${BASE_URL}/users`).then(res=>res.json());
+  },
+
+  async addUser(){
+    let res = fetch(`${BASE_URL}/users`, {
+      method:"POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user.toJSON())
+    })
+
+    return await res.json()
+  },
+
+  updateUser(user){
+    fetch(`${BASE_URL}/users/${user.id}`, {
+      method:"PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user.toJSON())
+    })
+  },
 
     ///serialize
     serialize(obj){

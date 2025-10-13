@@ -215,3 +215,25 @@ input, select {
     padding: 0.5rem;
   }
 }
+
+section{
+  text-align: center;
+}
+
+.login-form {
+  max-width: 400px;
+  margin: auto;
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.create-account-form {
+  max-width: 400px;
+  margin: auto;
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}

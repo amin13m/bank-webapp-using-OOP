@@ -22,6 +22,9 @@ export const Events = {
     document
       .querySelector("nav")
       .addEventListener("click", this.navHandler);
+    document
+      .querySelectorAll("a")
+      .forEach((a) => a.addEventListener("click", this.navHandler));
     },
 
   async handleBankSelect(e) {
@@ -54,6 +57,7 @@ export const Events = {
   },
 
   navHandler(e) {
+    if (e.target.tagName !== "BUTTON" && e.target.tagName !== "A") return;
     const sectionId = e.target.dataset.section;
     UI.showSection(sectionId);
   }
