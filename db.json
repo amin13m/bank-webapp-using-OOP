@@ -17,12 +17,16 @@
       "name": "sepehr"
     }
   ],
+  "users": [
+    { "id": 1, "username": "ali", "password": "1234" },
+    { "id": 2, "username": "sara", "password": "abcd" }
+  ],
   "accounts": [
     {
       "id": "ac1",
       "owner": "ali",
       "password": 1234,
-      "balence": 12090,
+      "balence": 10180,
       "bankId": "ba3",
       "_type": "SavingAccount"
     },
@@ -30,7 +34,7 @@
       "id": "ac2",
       "owner": "ahmad",
       "password": "1234",
-      "balence": 10570,
+      "balence": 12170,
       "bankId": "ba1",
       "_type": "CheckingAccount"
     },
@@ -38,7 +42,7 @@
       "id": "ac3",
       "owner": "ali",
       "password": "1234",
-      "balence": 3060,
+      "balence": 3370,
       "bankId": "ba1",
       "_type": "CheckingAccount"
     },
@@ -53,43 +57,75 @@
   ],
   "transactions": [
     {
-      "id": "TA_TueOct07202508:56:00GMT-0700(PacificDaylightTime)",
-      "fromID": "ac2",
-      "toID": "ac1",
-      "amount": 190,
-      "date": "2025-10-07T15:56:00.718Z",
+      "id": "TA_SatOct11202506:51:43GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac3",
+      "amount": 100,
+      "date": "2025-10-11T13:51:43.061Z",
       "_type": "Transaction"
     },
     {
-      "id": "TA_TueOct07202508:56:04GMT-0700(PacificDaylightTime)",
-      "fromID": "ac3",
-      "toID": "ac1",
-      "amount": 190,
-      "date": "2025-10-07T15:56:04.171Z",
+      "id": "TA_SatOct11202506:51:53GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac3",
+      "amount": 100,
+      "date": "2025-10-11T13:51:53.372Z",
       "_type": "Transaction"
     },
     {
-      "id": "TA_TueOct07202508:56:52GMT-0700(PacificDaylightTime)",
-      "fromID": "ac3",
-      "toID": "ac1",
-      "amount": 190,
-      "date": "2025-10-07T15:56:52.486Z",
+      "id": "TA_SatOct11202506:52:44GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-11T13:52:44.847Z",
       "_type": "Transaction"
     },
     {
-      "id": "TA_WedOct08202506:53:32GMT-0700(PacificDaylightTime)",
-      "fromID": "ac3",
-      "toID": "ac1",
-      "amount": 190,
-      "date": "2025-10-08T13:53:32.577Z",
+      "id": "TA_SatOct11202506:52:55GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-11T13:52:55.241Z",
       "_type": "Transaction"
     },
     {
-      "id": "TA_WedOct08202507:56:01GMT-0700(PacificDaylightTime)",
-      "fromID": "ac3",
-      "toID": "ac1",
-      "amount": 190,
-      "date": "2025-10-08T14:56:01.771Z",
+      "id": "TA_SatOct11202506:54:11GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-11T13:54:11.524Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_SatOct11202506:55:10GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-11T13:55:10.734Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_SatOct11202506:56:09GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-11T13:56:09.644Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_SatOct11202506:56:53GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-11T13:56:53.354Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_SatOct11202507:15:37GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-11T14:15:37.221Z",
       "_type": "Transaction"
     }
   ]

@@ -1,46 +1,25 @@
-import { Events } from "./events.js";
 import { Bank } from "../models/Bank.js";
 import { Transaction } from "../models/Transaction.js";
-
-
-async function init() {
-  await Bank.loadAllFromServer();
-}
-
-
-let  test = async()=>{
-
-  let sepehr = Bank.findBankByName("sepehr")
-  let ayande = Bank.findBankByName("ayande")
-  let mellat = Bank.findBankByName("mellat")
-
-  let acc1 = Bank.findAccountById("ac1")
-  let acc2 =  Bank.findAccountById("ac3")
-  
-  let TA = new Transaction(undefined  , acc2 ,acc1,190)
-  await TA.execute()
-
-
-  console.log(sepehr,ayande,mellat)
+import { Events } from "./events.js";
+import { UI } from "./ui.js";
 
 
 
-  let t =await Transaction.loadAllFromServer()
 
-  console.log(t)
+document.addEventListener("DOMContentLoaded",
+  async ()=>{
+    try {
+      console.log("data loading")
 
-}
+      await Bank.loadAllFromServer()
 
+      UI.init()
+      Events.init()
 
-document.addEventListener("DOMContentLoaded",()=>{
-    init()
-    Events.init()
-
-})
-
-
-addEventListener("click",()=>{
-  test()
+      console.log("app ready")
+    } catch (err) {
+      console.log("err intializing app :" , err)
+    }
 })
 
 
@@ -74,6 +53,31 @@ addEventListener("click",()=>{
 
 //owner,password, balance 
 /*
+
+
+let  test = async()=>{
+
+  let sepehr = Bank.findBankByName("sepehr")
+  let ayande = Bank.findBankByName("ayande")
+  let mellat = Bank.findBankByName("mellat")
+
+  let acc1 = Bank.findAccountById("ac1")
+  let acc2 =  Bank.findAccountById("ac2")
+  let acc3 = Bank.findAccountById("ac3")
+
+  await Transaction.execute(acc1,acc2,100)
+
+
+  let t =await Transaction.loadAllFromServer()
+  let at = await Transaction.loadAccountsTransactionsById(acc3.id)
+
+}
+
+
+
+
+
+
   let banks = await BankAPI.getBanks();
 
   let mellat = new Bank(banks[0].id, banks[0].name);

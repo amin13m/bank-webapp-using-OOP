@@ -1,194 +1,217 @@
-/* تنظیمات کلی */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: sans-serif;
-  background: #f8f9fb;
-  color: #333;
-  line-height: 1.6;
-  direction: rtl;
+
+:root {
+  --primary: #004b8d;
+  --secondary: #e6f0fa;
+  --text: #333;
+  --white: #fff;
+  --radius: 10px;
 }
 
-/* هدر */
-.header {
+body {
+  font-family: "Vazirmatn", sans-serif;
+  margin: 0;
+  background-color: var(--secondary);
+  color: var(--text);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Header --- */
+.app-header {
+  background: var(--primary);
+  color: var(--white);
+  display: flex;
   align-items: center;
-  background: #1e3a8a;
-  color: white;
-  padding: 15px 30px;
+  justify-content: space-between;
+  padding: 1rem 2rem;
   position: sticky;
   top: 0;
+  z-index: 10;
 }
-.logo {
-  font-size: 1.2rem;
+
+.app-header .logo {
+  font-size: 1.3rem;
   font-weight: bold;
 }
-.nav ul {
+
+.nav {
   display: flex;
-  list-style: none;
-  gap: 20px;
+  gap: 1rem;
 }
-.nav a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.nav a:hover {
-  color: #cbd5e1;
-}
-.menu-toggle {
-  display: none;
-  font-size: 1.5rem;
+
+.nav button {
+  background: none;
+  border: none;
+  color: var(--white);
   cursor: pointer;
+  font-size: 1rem;
 }
 
-/* بنر */
-.hero {
-  text-align: center;
-  padding: 80px 20px;
-  background: linear-gradient(to right, #1e40af, #3b82f6);
-  color: white;
-}
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background: #2563eb;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: background 0.3s;
-}
-.btn:hover {
-  background: #1d4ed8;
+.nav button:hover {
+  text-decoration: underline;
 }
 
-/* خدمات */
-.services {
-  padding: 50px 20px;
-  text-align: center;
-}
-.services h2 {
-  margin-bottom: 30px;
-}
-.cards {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  flex: 1 1 250px;
-  max-width: 300px;
-}
-
-/* login */
-.login {
-  padding: 50px 20px;
-  text-align: center;
-  
-  form {
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-}
-
-/* create-account */
-.create-account {
+/* دکمه منو برای موبایل */
+.menu-btn {
   display: none;
-  padding: 50px 20px;
-  text-align: center;
-  form {
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-}
-
-/* داشبورد */
-.dashboard {
-  display: grid;
-  gap: 20px;
-  padding: 30px;
-  grid-template-columns: 1fr;
-}
-.balance p {
+  background: none;
+  border: none;
   font-size: 1.5rem;
-  color: #1e40af;
-  font-weight: bold;
-}
-.transactions table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.transactions th, .transactions td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: center;
-}
-.transactions th {
-  background: #f1f5f9;
-}
-.summary p {
-  margin: 8px 0;
+  color: var(--white);
 }
 
-/* فوتر */
-.footer {
-  background: #1e3a8a;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 30px;
+/* --- Main --- */
+
+main {
+  flex: 1;
+  padding: 2rem;
 }
 
-/* ریسپانسیو */
+section {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+section.active {
+  display: block;
+}
+
+/* کارت‌های نمایش حساب */
+#accountsList, #transactionsList {
+  display: grid;
+  gap: 1rem;
+}
+
+.account-card, .transaction-card {
+  background: var(--white);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.account-card:hover {
+  transform: scale(1.02);
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* --- انیمیشن --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ریسپانسیو موبایل --- */
 @media (max-width: 768px) {
-  .nav ul {
+  .nav {
     display: none;
     flex-direction: column;
-    background: #1e3a8a;
+    background: var(--primary);
     position: absolute;
     top: 60px;
     right: 0;
-    width: 200px;
-    padding: 20px;
+    width: 100%;
   }
-  .nav ul.show {
+
+  .nav.active {
     display: flex;
   }
-  .menu-toggle {
+
+  .menu-btn {
     display: block;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  #accountsList, #transactionsList {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section {
+  display: none;
+  padding: 20px;
+}
+
+.section.active {
+  display: block;
+}
+
+.transfer-form {
+  max-width: 400px;
+  margin: auto;
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+input, select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.btn {
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #005fd4;
+}
+
+.message {
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+
+
+@media (max-width: 500px) {
+  .transfer-form {
+    width: 90%;
+  }
+}
+
+/* --- ریسپانسیو دسکتاپ --- */
+@media (min-width: 769px) {
+  #accountsList, #transactionsList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #dashboard select {
+    width: 300px;
+    padding: 0.5rem;
   }
 }

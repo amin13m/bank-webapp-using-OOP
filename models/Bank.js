@@ -1,5 +1,6 @@
 import { BankAPI } from "../scripts/api.js";
 import { SavingAccount, CheckingAccount, BankAccount } from "./accounts.js";
+import { Transaction } from "./Transaction.js";
 
 export class Bank {
   static #allBanks = [];
@@ -70,29 +71,15 @@ export class Bank {
   }
 
   static findBankByName(name) {
-    console.log(this.#allBanks)
+    
     if (Bank.#allBanks.filter((bank) => bank.name === name)) {
       return Bank.#allBanks.filter((bank) => bank.name === name);
     } else {
       return null;
     }
   }
-
-
-  async addAccount(account) {
-    this.#accounts.push(account);
-    Bank.#allAccounts.push(account);
-    account.bankId = this.id;
-    let isExist = await BankAPI.getAccountById(account.id);
-
-    if (!isExist[0]) {
-      await BankAPI.addAccount(account);
-      console.log("false ,account , isExist");
-    } else {
-      console.log("accont already add to the bank");
-    }
-  }
-
+  
+  
 
   findAccountById(id) {
     if (this.#accounts.find((account) => account.id === id)) {
@@ -154,14 +141,14 @@ export class Bank {
 
   async addAccount(
     owner,
-    password,
+    userID,
     balance = 0,
     accountType = "CheckingAccount"
   ) {
     const acc =
       accountType === "SavingAccount"
-        ? new SavingAccount(undefined, owner, password, balance, this.id)
-        : new CheckingAccount(undefined, owner, password, balance, this.id);
+        ? new SavingAccount(undefined, owner, userID, balance, this.id)
+        : new CheckingAccount(undefined, owner, userID, balance, this.id);
     this.#accounts.push(acc);
     Bank.#allAccounts.push(acc);
     await BankAPI.addAccount(acc);
@@ -170,12 +157,34 @@ export class Bank {
   }
 
  
+  /*
+  async addAccount(account) {
+    this.#accounts.push(account);
+    Bank.#allAccounts.push(account);
+    account.bankId = this.id;
+    let isExist = await BankAPI.getAccountById(account.id);
+
+    if (!isExist[0]) {
+      await BankAPI.addAccount(account);
+      console.log("false ,account , isExist");
+    } else {
+      console.log("accont already add to the bank");
+    }
+  }
+  */
 
   get accounts() {
     return this.#accounts;
   }
   set accounts(accounts) {
     this.#accounts = accounts;
+  }
+
+
+  static transfer(fromId, toId, amount) {
+    fromAcc=Bank.findAccountById(fromId);
+    toAcc=Bank.findAccountById(toId);
+    return Transaction.execute(fromAcc, toAcc, amount);
   }
 }
 

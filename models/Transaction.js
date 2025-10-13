@@ -1,4 +1,5 @@
 import { BankAPI } from "../scripts/api.js";
+import { Bank } from "./Bank.js";
 
 export let Transaction = class {
   constructor(
@@ -18,26 +19,41 @@ export let Transaction = class {
   static ID = 1;
 
   //let TA = new Transaction(undefined  , acc2 ,acc1,190)
-  async execute() {
-    if (this.fromAccount.balence < this.amount) {
+
+
+
+  static async execute(fromAccount, toAccount, amount) {
+      if (fromAccount.balence < amount) {
       throw new Error("Insufficient funds");
     }
 
     // 1. OOP changes
-    this.fromAccount.withdraw(this.amount);
-    this.toAccount.deposit(this.amount);
+    fromAccount.withdraw(amount);
+    toAccount.deposit(amount);
 
     // 2. server balece update
-    await BankAPI.updateAccount(this.fromAccount);
-    await BankAPI.updateAccount(this.toAccount);
+    await BankAPI.updateAccount(fromAccount);
+    await BankAPI.updateAccount(toAccount);
+   
+   //3.  making transaction
 
-    // 3. add trasaction to server
-    const savedTA = await BankAPI.addTransaction(this);
-    
-    console.log("Transaction completed:", savedTA);
+    const transaction = new Transaction(
+      undefined,
+      fromAccount,
+      toAccount,
+      amount
+    );
 
-    return savedTA;
+    //4. sening transactions to server
+
+    const savedTransaction = await BankAPI.addTransaction(transaction);
+
+    console.log(" Transaction executed successfully:",transaction.info());
+    return savedTransaction;
+  
+
   }
+  
 
   toJSON() {
     return {
@@ -50,12 +66,26 @@ export let Transaction = class {
     };
   }
 
+  static fromJSON(data){
+    return new Transaction(
+      data.id,
+      Bank.findAccountById(data.fromID),
+      Bank.findAccountById(data.toID),
+      data.amount,
+      data.date
+    )
+  }
+
   static async loadAllFromServer() {
-    return await BankAPI.getAllTransactions();
+    let allTA = await BankAPI.getAllTransactions();
+
+    return allTA.map(t => Transaction.fromJSON(t))
   }
 
   static async loadAccountsTransactionsById(accID) {
-    return await BankAPI.getTransactionsByAccountId(accID);
+    let TA =  await BankAPI.getTransactionsByAccountId(accID);
+  
+    return TA.map(t => Transaction.fromJSON(t))
   }
 
   static generateId() {
@@ -64,6 +94,6 @@ export let Transaction = class {
   }
 
   info() {
-    return `type : ${this.type} , from : ${this.from} , to : ${this.to} , amount : ${this.amount} , date : ${this.date}`;
+    return `  amount : ${this.amount} from : ${this.fromAccount.id}  to : ${this.toAccount.id}  in date : ${this.date}`;
   }
 };

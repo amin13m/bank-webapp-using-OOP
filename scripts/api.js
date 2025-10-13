@@ -88,11 +88,10 @@ export const BankAPI = {
   },
 
   async getTransactionsByAccountId(accountId) {
-    //transactions of one account
-    const res = await fetch(
-      `${BASE_URL}/transactions?fromId=${accountId}&toId=${accountId}`
-    );
-    return await res.json();
+  const res = await fetch(`${BASE_URL}/transactions`);
+  const data = await res.json();
+
+  return data.filter( tx => tx.fromID === accountId || tx.toID === accountId )
   },
 
   async addTransaction(transaction) {

@@ -1,92 +1,84 @@
 <!DOCTYPE html>
 <html lang="fa">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بانک مدرن</title>
-  <link rel="stylesheet" href="style/style.css">
-</head>
-<body>
-  <!-- هدر -->
-  <header class="header">
-    <div class="logo">بانک مدرن</div>
-    <nav class="nav">
-      <ul>
-        <li><a href="#">خانه</a></li>
-        <li><a href="#">خدمات</a></li>
-        <li><a href="#">تماس با ما</a></li>
-        <li><a href="dashboard.html">داشبورد</a></li>
-      </ul>
-    </nav>
-    <div class="menu-toggle">&#9776;</div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بانک من</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <!--  Header -->
+    <header class="app-header">
+      <div class="logo">🏦 بانک من</div>
+      <nav class="nav">
+        <button data-section="dashboard">داشبورد</button>
+        <button data-section="accounts">حساب‌ها</button>
+        <button data-section="transactions">تراکنش‌ها</button>
+        <button data-section="transfer">انتقال وجه</button>
+      </nav>
+      <button id="menuBtn" class="menu-btn">☰</button>
+    </header>
 
-  <!-- بنر -->
-  <section class="hero">
-    <h1>بانکداری آسان و مدرن</h1>
-    <p>با بانک مدرن، آینده مالی خود را بسازید.</p>
-    <a href="#" class="btn">افتتاح حساب</a>
-  </section>
+    <!--  Main -->
+    <main>
+      <section id="dashboard" class="active">
+        <h2>انتخاب بانک</h2>
+        <select id="bankSelect">
+          <span id="bankList"></span>
+        </select>
+        <div id="bankInfo"></div>
+      </section>
 
-  <!-- خدمات -->
-  <section class="services">
-    <h2>خدمات ما</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>وام</h3>
-        <p>وام‌های متنوع با شرایط ویژه برای نیازهای شما.</p>
-      </div>
-      <div class="card">
-        <h3>پس‌انداز</h3>
-        <p>حساب‌های پس‌انداز با سود مطمئن و امنیت بالا.</p>
-      </div>
-      <div class="card">
-        <h3>کارت اعتباری</h3>
-        <p>کارت‌های اعتباری مدرن با خدمات ویژه مشتریان.</p>
-      </div>
-    </div>
-  </section>
+      <section id="accounts" class="hidden">
+        <h2>لیست حساب‌ها</h2>
+        <div id="accountsList"></div>
+      </section>
 
-  <!-- login -->
-  <section class="login">
-    <h2>ورود به حساب کاربری</h2>
-    <form>
-      <input type="text" placeholder="نام کاربری" required>
-      <input type="password" placeholder="رمز عبور" required>
-      <button type="submit" class="btn">ورود</button>
-    </form>
-    <p>حساب کاربری ندارید؟ <a href="#">ساخت حساب</a></p>
-  </section>
+      <section id="transactions" class="hidden">
+        <h2>تراکنش‌ها</h2>
+        <div id="transactionsList"></div>
+      </section>
 
+      <section id="transfer" class="active section">
+        <h2>🔁 انتقال وجه</h2>
 
-  <!-- create-account -->
-  <section class="create-account">
-    <h2>ساخت حساب کاربری</h2>
-    <form>
-      <input type="text" placeholder="نام کاربری" required>
-      <input type="email" placeholder="ایمیل" required>
-      <input type="password" placeholder="رمز عبور" required>
-      <button type="submit" class="btn">ساخت حساب</button>
-    </form>
-    <p>حساب کاربری دارید؟ <a href="#">ورود</a></p>
-  </section>
+        <form id="transferForm" class="transfer-form">
+          <div class="form-group">
+            <label for="fromAccount">از حساب:</label>
+            <select id="fromAccount" name="fromAccount" required></select>
+          </div>
 
-  <!-- فوتر -->
-  <footer class="footer">
-    <p>تماس با ما: ۰۲۱-۱۲۳۴۵۶۷۸ | ایمیل: info@modernbank.ir</p>
-    <p>© ۲۰۲۵ بانک مدرن</p>
-  </footer>
+          <div class="form-group">
+            <label for="toAccount">به حساب:</label>
+            <select id="toAccount" name="toAccount" required>
+              <span id="accountList"></span>
+            </select>
+          </div>
 
-  <script>
-    // منوی همبرگری
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav ul');
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('show');
-    });
-  </script>
-  
-  <script type="module" src="scripts/main.js"></script>
+          <div class="form-group">
+            <label for="amount">مبلغ انتقال (تومان):</label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              min="1000"
+              step="1000"
+              required
+            />
+          </div>
 
-</body>
+          <button type="submit" class="btn">انتقال</button>
+        </form>
+
+        <p id="transferMessage" class="message"></p>
+      </section>
+    </main>
+
+    <!--  Footer -->
+    <footer>
+      <p>© 2025 MyBank | کلیه حقوق محفوظ است</p>
+    </footer>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
 </html>
