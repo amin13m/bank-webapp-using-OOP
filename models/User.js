@@ -33,4 +33,6 @@ export class User{
     static fromJSON(data) {
         return new User(data.id, data.username, data.password, data.role);
     }
+
+
 }

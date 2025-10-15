@@ -1,5 +1,6 @@
 
 import { Bank } from "../models/Bank.js";
+import { Auth } from "../models/Auth.js";
 
 export const UI = {
   init() {    
@@ -7,6 +8,7 @@ export const UI = {
     this.setupNavigation();
     this.setupMenuToggle();
     this.renderBankList();
+    this.showLoginBtn();
     console.log("🖥️ UI آماده شد");
   },
 
@@ -23,6 +25,12 @@ export const UI = {
       sec.classList.remove("active")
     );
     document.getElementById(sectionId).classList.add("active");
+  },
+
+  showLoginBtn() {
+    let islogin = Auth.isLoggedIn();
+    document.querySelector("#loginbtn").style.display = islogin ? "none" : "inline flex";
+    document.querySelector("#logoutbtn").style.display = islogin ? "inline flex" : "none";
   },
 
   setupMenuToggle() {
@@ -79,5 +87,12 @@ export const UI = {
 
   refresh() {
     this.renderBankList();
-  }
+  },
+
+  showDashboard(user) {
+    this.showSection("dashboard");
+    let accounts = Bank.findUsersAccounts(user)
+   // this.renderAccounts(accounts);
+    
+  },
 };

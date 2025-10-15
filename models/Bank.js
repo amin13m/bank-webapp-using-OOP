@@ -156,23 +156,6 @@ export class Bank {
     return acc;
   }
 
- 
-  /*
-  async addAccount(account) {
-    this.#accounts.push(account);
-    Bank.#allAccounts.push(account);
-    account.bankId = this.id;
-    let isExist = await BankAPI.getAccountById(account.id);
-
-    if (!isExist[0]) {
-      await BankAPI.addAccount(account);
-      console.log("false ,account , isExist");
-    } else {
-      console.log("accont already add to the bank");
-    }
-  }
-  */
-
   get accounts() {
     return this.#accounts;
   }
@@ -186,62 +169,8 @@ export class Bank {
     toAcc=Bank.findAccountById(toId);
     return Transaction.execute(fromAcc, toAcc, amount);
   }
+
+  static findUsersAccounts(user) {
+    return Bank.#allAccounts.filter((account) => account.owner === user.username);
+  }
 }
-
-
-/*
- async updateAccount(accountId, newData) {
-    const acc = this.#accounts.find((a) => a.id === accountId);
-    if (!acc) throw new Error("Account not found");
-    acc.update(newData);
-    await BankAPI.updateAccount(acc.id, acc.toJSON());
-  }
- static async loadAllAccounts() {
-    const data = await BankAPI.getAccountsByBank(this.id);
-    
-    
-    let accs = data.map((acc) => {
-      if (acc._type === "SavingAccount")
-        return new SavingAccount(
-          acc.id,
-          acc.owner,
-          acc.password,
-          acc.balence,
-          acc.bankId
-        );
-      if (acc._type === "CheckingAccount")
-        return new CheckingAccount(
-          acc.id,
-          acc.owner,
-          acc.password,
-          acc.balence,
-          acc.bankId
-        );
-
-        Object
-    });
-  }
-  async loadAccounts() {
-    const data = await BankAPI.getAccountsByBank(this.id);
-    let accs = data.map((acc) => {
-      if (acc._type === "SavingAccount")
-        return new SavingAccount(
-          acc.id,
-          acc.owner,
-          acc.password,
-          acc.balence,
-          acc.bankId
-        );
-      if (acc._type === "CheckingAccount")
-        return new CheckingAccount(
-          acc.id,
-          acc.owner,
-          acc.password,
-          acc.balence,
-          acc.bankId
-        );
-    });
-    this.accounts.push(...accs);
-    Bank.#allAccounts.push(...accs);
-  }
-*/

@@ -6,14 +6,14 @@ export let Auth = {
 
     async login(username, password) {
         let allUsers = await BankAPI.getAllUsers()
-        let found = allUsers.find(user=>{
+        let found = allUsers.find(u=>{
             return u.username === username && u.password === password
         })
 
         if(!found) throw new Error("wrong password or username");
 
         this.currentUser = new User(found.id, found.username, found.password, found.role);
-        localStorage.setItem("currentUser", JSON.stringify(found.toJSON()));
+        localStorage.setItem("currentUser", JSON.stringify(found));
         
         return this.currentUser
     },

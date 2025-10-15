@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded",
       Events.init()
 
       console.log("app ready")
-      
+
     } catch (err) {
       console.log("err intializing app :" , err)
     }

@@ -15,7 +15,8 @@
         <button data-section="accounts">حساب‌ها</button>
         <button data-section="transactions">تراکنش‌ها</button>
         <button data-section="transfer">انتقال وجه</button>
-        <button data-section="login">ورود</button>
+        <button data-section="login" id="loginbtn" class="bouldBorder">ورود/ ثبت نام</button>
+        <button data-section="logout" id="logoutbtn" class="bouldBorder">خروج</button>
       </nav>
       <button id="menuBtn" class="menu-btn">☰</button>
     </header>
@@ -38,6 +39,7 @@
         </form>
         <span>حساب کاربری ندارید؟ <a data-section="createAccount">ثبت نام کنید</a></span>
       </section>
+
       <section id="createAccount" class="hidden">
         <h2>ثبت نام</h2>
         <form id="createAccountForm" class="create-account-form">
@@ -57,6 +59,15 @@
         </form>
         <span>حساب کاربری دارید؟ <a data-section="login">ورود</a></span>
       </section>
+
+      <section id="logout" class="hidden">
+        <h2>خروج از حساب</h2>
+        <button id="logoutBtn">خروج</button>
+      </section>
+
+
+
+
 
       <section id="dashboard" class="active">
         <h2>انتخاب بانک</h2>
