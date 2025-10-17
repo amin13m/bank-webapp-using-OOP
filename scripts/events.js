@@ -19,7 +19,7 @@ export const Events = {
       .addEventListener("submit", this.handleTransfer);
     document
       .querySelector("#accountList")
-      .addEventListener("change", this.handleAccountSelect);
+      .addEventListener("click", this.handleAccountSelect);
     document
       .querySelector("nav")
       .addEventListener("click", this.navHandler);
@@ -39,8 +39,13 @@ export const Events = {
       .addEventListener("scroll", this.handleScroll);
     document
       .querySelector("#acc-sc-accountList")
-      .addEventListener("change", this.handleAccountSelectInAccountSection);
-    
+      .addEventListener("click", this.handleAccountSelectInAccountSection);
+    document
+      .querySelector("#createBankAccountBtn")
+      .addEventListener("click", this.handleCreateBankAccountBtn);
+    document
+      .querySelector("#createBankAccountForm")
+      .addEventListener("submit", this.handleCreateBankAccountForm);
     },
 
   async handleBankSelect(e) {
@@ -73,7 +78,7 @@ export const Events = {
       await Bank.transfer(fromId, toId, amount);
       const accounts = Bank.getAllAccountsInSystem();
       UI.renderUpdate();
-
+//
       UI.showMsg("انتقال با موفقیت انجام شد");
       
       UI.showDashboard()
@@ -149,6 +154,37 @@ export const Events = {
     const account = Bank.findAccountById(accountId);
     Auth.currentAccount = account
     UI.renderAccount();
+  },
+
+
+  handleCreateBankAccountBtn(e){
+    e.preventDefault();
+    UI.showSection("createBankAccount")
+  },
+
+  async handleCreateBankAccountForm(e){
+    e.preventDefault()
+    const accounts = Bank.findUsersAccounts(Auth.currentUser);
+
+    const userID = accounts[0].id;
+    const owner = accounts[0].owner;
+    const balance = Number(e.target.initialBalance.value);
+    const bank =await Auth.currentBank()
+    const accountType = e.target.accountType.value;
+    
+
+    try {
+      await bank.addAccount(owner, userID, balance, accountType)
+      
+      UI.showMsg("حساب با موفقیت ایجاد شد");
+      UI.renderElements();
+      UI.showSection("accounts");
+    } catch (err) {
+      console.log(err)
+      UI.showError("regester failed : " + err.message);
+    }
+
+
   },
 
   handleScroll(){

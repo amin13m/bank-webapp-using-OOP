@@ -146,8 +146,8 @@
 
         <!-- دکمه‌های کنترل -->
         <div class="account-actions">
-          <button class="create-btn">➕ ساخت حساب جدید</button>
-          <button class="delete-btn">🗑️ حذف حساب</button>
+          <button id="createBankAccountBtn" class="create-btn">➕ ساخت حساب جدید</button>
+          <button id="deleteBankAccountBtn" class="delete-btn">🗑️ حذف حساب</button>
         </div>
       </section>
 
@@ -155,6 +155,7 @@
         <h2 class="section-title">ساخت حساب جدید</h2>
 
         <form id="createBankAccountForm" class="create-account-form">
+ <!--        
           <div class="form-group">
             <label for="accountName">نام حساب</label>
             <input
@@ -164,28 +165,27 @@
               required
             />
           </div>
-
+-->
           <div class="form-group">
             <label for="accountType">نوع حساب</label>
             <select id="accountType" required>
-              <option value="">انتخاب کنید</option>
               <option value="saving">پس‌انداز</option>
               <option value="checking">جاری</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="initialBalance">موجودی اولیه (ریال)</label>
+            <label for="initialBalance">موجودی اولیه (تومان)</label>
             <input
               type="number"
               id="initialBalance"
-              min="0"
-              placeholder="مثلاً 1000000"
+              min="1000"
+              placeholder=" مبلغ سپرده"
               required
             />
           </div>
 
-          <button type="submit" class="createbtn ">ایجاد حساب</button>
+          <button type="submit" class="createbtn create-btn">ایجاد حساب</button>
         </form>-
       </section>
 

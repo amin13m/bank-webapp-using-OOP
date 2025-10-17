@@ -63,8 +63,11 @@ export class BankAccount  {
 
 
    static generateId(){ 
-      let id = `AC_${new Date()}`
-      return id.replace(/\s+/g,"")
+    
+      const D = new Date();
+      const ID = `${D.getFullYear()}${D.getMonth()}${D.getDate()}${D.getHours()}${D.getMinutes()}${D.getSeconds()}${D.getMilliseconds()}`
+
+      return `AC_${ID}`
     }
 
 

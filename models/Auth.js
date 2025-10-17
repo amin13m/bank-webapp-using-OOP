@@ -1,9 +1,12 @@
 import { BankAPI } from "../scripts/api.js"
+import { Bank } from "./Bank.js"
 import { User } from "./User.js"
 
 export let Auth = {
     currentUser: null,
     currentAccount: null,
+    currentBank: async()=>await Bank.findBankByName("mybank"),
+    userThisBankAccounts: async ()=>(await Auth.currentBank()).findUsersAccounts(Auth.currentUser.username),
 
     async login(username, password) {
         let allUsers = await BankAPI.getAllUsers()

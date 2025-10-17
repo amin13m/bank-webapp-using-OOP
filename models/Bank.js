@@ -5,24 +5,29 @@ import { Transaction } from "./Transaction.js";
 export class Bank {
   static #allBanks = [];
   static #allAccounts = [];
-  #accounts = [];
+  ;
   constructor(id = Bank.generateId(), name) {
     this.id = id;
     this.name = name;
+    this.accounts = [];
     Bank.#allBanks.push(this);
   }
 
-  static ID = 1;
+
+  static get allBanks(){return Bank.#allBanks}
+  static set allBanks(banks){Bank.#allBanks = banks}
 
   static get allAccounts() {
     return Bank.#allAccounts;
+  }
+  static set allAccounts(accounts) {
+    Bank.#allAccounts = accounts;
   }
 
   toJSON() {
     return {
       id: this.id,
       name: this.name,
-      accounts: this.#accounts,
       _type: this.constructor.name,
     };
   }
@@ -37,20 +42,22 @@ export class Bank {
       BankAPI.getAccounts()
     ]);
 
-
+    
     Bank.#allBanks = banksRaw.map(b => Bank.fromJSON(b));
     const bankById = new Map(Bank.#allBanks.map(b => [b.id, b]));
 
 
+
     Bank.#allAccounts = accountsRaw.map(aRaw => {
       const acc = BankAccount.fromJSON(aRaw);
-      const bank = bankById.get(aRaw.bankId);
+      const bank = bankById.get(acc.bankId);
+      
+
       if (bank) {
-        bank.#accounts.push(acc);
+        bank.accounts.push(acc);
       }
       return acc;
     });
-
 
     return { banks: Bank.#allBanks, accounts: Bank.allAccounts };
   }
@@ -58,7 +65,7 @@ export class Bank {
 
   async loadThisBankAccounts() {
     const accountsRaw = await BankAPI.getAccountsByBank(this.id);
-    this.#accounts= accountsRaw.map(a => Account.fromJSON(a));
+    this.accounts= accountsRaw.map(a => Account.fromJSON(a));
   }
 
 
@@ -70,10 +77,10 @@ export class Bank {
     }
   }
 
-  static findBankByName(name) {
-    
-    if (Bank.#allBanks.filter((bank) => bank.name === name)) {
-      return Bank.#allBanks.filter((bank) => bank.name === name);
+  static async findBankByName(name) {
+  
+    if (Bank.#allBanks.find((bank) => bank.name === name)) {
+      return Bank.#allBanks.find((bank) => bank.name === name);
     } else {
       return null;
     }
@@ -82,11 +89,15 @@ export class Bank {
   
 
   findAccountById(id) {
-    if (this.#accounts.find((account) => account.id === id)) {
-      return this.#accounts.find((account) => account.id === id);
+    if (this.accounts.find((account) => account.id === id)) {
+      return this.accounts.find((account) => account.id === id);
     } else {
       return null;
     }
+  }
+
+  findUsersAccounts(owner) {
+    return this.accounts.filter((account) => account.owner === owner);
   }
 
   static findAccountById(id) {
@@ -106,7 +117,7 @@ export class Bank {
   }
 
   removeAccount(id) {
-    this.#accounts = this.#accounts.filter((account) => account.id !== id);
+    this.accounts = this.accounts.filter((account) => account.id !== id);
     Bank.#allAccounts = Bank.#allAccounts.filter(
       (account) => account.id !== id
     );
@@ -114,13 +125,13 @@ export class Bank {
 
   printReport() {
     console.log(`${this.name} report : `);
-    this.#accounts.forEach((e) =>
+    this.accounts.forEach((e) =>
       console.log(`id : ${e.id} ${e.name} : ${e.balence}`)
     );
   }
 
   getAllAccounts() {
-    return [...this.#accounts];
+    return [...this.accounts];
   }
 
   static getAllAccountsInSystem() {
@@ -132,8 +143,11 @@ export class Bank {
   }
 
   static generateId() {
-    let id = `BA_${new Date()}`;
-    return id.replace(/\s+/g, "");
+    
+      const D = new Date();
+      const ID = `${D.getFullYear()}${D.getMonth()}${D.getDate()}${D.getHours()}${D.getMinutes()}${D.getSeconds()}${D.getMilliseconds()}`
+
+      return `BA_${ID}`
   }
 
 
@@ -149,19 +163,13 @@ export class Bank {
       accountType === "SavingAccount"
         ? new SavingAccount(undefined, owner, userID, balance, this.id)
         : new CheckingAccount(undefined, owner, userID, balance, this.id);
-    this.#accounts.push(acc);
+    this.accounts.push(acc);
     Bank.#allAccounts.push(acc);
     await BankAPI.addAccount(acc);
-    console.log(acc);
+
     return acc;
   }
 
-  get accounts() {
-    return this.#accounts;
-  }
-  set accounts(accounts) {
-    this.#accounts = accounts;
-  }
 
 
   static transfer(fromId, toId, amount) {
@@ -173,6 +181,10 @@ export class Bank {
 
   static findUsersAccounts(user) {
     return Bank.#allAccounts.filter((account) => account.owner === user.username);
+  }
+
+  findThisBankUsersAccount(user){
+    return this.accounts.filter((account) => account.owner === user.username);
   }
 
   static sortUserAccountByBank(bankId) {

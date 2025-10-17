@@ -67,12 +67,13 @@ export let Transaction = class {
   }
 
   static fromJSON(data){
+     
     return new Transaction(
       data.id,
       Bank.findAccountById(data.fromID),
       Bank.findAccountById(data.toID),
       data.amount,
-      data.date
+      new Date(data.date)
     )
   }
 
@@ -89,8 +90,10 @@ export let Transaction = class {
   }
 
   static generateId() {
-    let id = `TA_${new Date()}`;
-    return id.replace(/\s+/g, "");
+      const D = new Date();
+      const ID = `${D.getFullYear()}${D.getMonth()}${D.getDate()}${D.getHours()}${D.getMinutes()}${D.getSeconds()}${D.getMilliseconds()}`
+
+      return `TA_${ID}`
   }
 
   static typeOfTxForAccount(tx , accID) {

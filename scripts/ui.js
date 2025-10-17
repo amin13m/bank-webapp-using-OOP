@@ -20,6 +20,7 @@ export const UI = {
       this.renderAccounts() 
       this.renderWelcome();  
       this.renderForm();
+      if(Auth.currentAccount!==null) this.renderDasbourdTransactions()
     }
   },
 
@@ -84,8 +85,8 @@ export const UI = {
       .join("");
   },
 
-  renderAccounts() {
-    let accounts = Bank.findUsersAccounts(Auth.currentUser);
+  async renderAccounts() {
+    let accounts = await Auth.userThisBankAccounts();
     this.accountList.forEach((accList) =>{ accList.innerHTML = accounts
       .map((acc) => {
         return `
@@ -134,8 +135,10 @@ export const UI = {
                 <span class="amount">${tx.amount.toLocaleString()}تومان</span>
               </div>
               <span>از: ${tx.fromAccount.id} (${tx.fromAccount.owner})</span>
-              <span>به: ${tx.toAccount.id} (${tx.toAccount.owner})</span><br>
-              <p>تاریخ: ${tx.date}</p>
+              <br>
+              <span>به: ${tx.toAccount.id} (${tx.toAccount.owner})</span>
+              <br>
+              <p>تاریخ: ${tx.date.getFullYear()}:${ tx.date.getMonth()}:${ tx.date.getDate() } ساعت : ${ tx.date.getHours()}:${tx.date.getMinutes()}</p>
             </div>
          `;
         })
@@ -158,9 +161,10 @@ export const UI = {
                </h3>
                <span class="amount expense">${tx.amount.toLocaleString()} تومان</span>
              </div>
-             <span>از:${tx.fromAccount.owner} (${tx.fromAccount.id})</span>
-             <span>به:${tx.toAccount.owner} (${tx.toAccount.id})</span>
-             <p class="transaction-date">${tx.date}</p>
+             <span>از:${tx.fromAccount.owner} (شماره حساب :${tx.fromAccount.id} , بانک :${Bank.findBankById(tx.fromAccount.bankId).name})</span>
+             <br>
+             <span>به:${tx.toAccount.owner} (شماره حساب :${tx.toAccount.id}  , بانک :${Bank.findBankById(tx.toAccount.bankId).name})</span>
+             <p class="transaction-date">تاریخ: ${tx.date.getFullYear()}:${ tx.date.getMonth()}:${ tx.date.getDate() } ساعت : ${ tx.date.getHours()}:${tx.date.getMinutes()}</p>
           </div>
         `;
         })
@@ -173,8 +177,8 @@ export const UI = {
 
 ///// TRANSFER FORM /////
 
-  renderFromAcc() {
-    let accounts = Bank.findUsersAccounts(Auth.currentUser);
+  async renderFromAcc() {
+    let accounts = await Auth.userThisBankAccounts();
     this.fromAccountList.innerHTML = accounts
       .map((acc) => {
         return `
@@ -225,9 +229,7 @@ export const UI = {
   showDashboard() {
     this.showSection("dashboard");
   
-    this.renderAccounts() 
-    this.renderWelcome();  
-    this.renderForm();
+    this.renderElements()
   },
 
   renderWelcome(){
