@@ -3,6 +3,7 @@ import { User } from "./User.js"
 
 export let Auth = {
     currentUser: null,
+    currentAccount: null,
 
     async login(username, password) {
         let allUsers = await BankAPI.getAllUsers()
@@ -20,6 +21,7 @@ export let Auth = {
 
     async register(username , password, role = "user") {
         let newUser = new User(undefined, username, password, role);
+        
         await BankAPI.addUser(newUser);
 
         this.currentUser = newUser
@@ -43,6 +45,11 @@ export let Auth = {
 
     isLoggedIn() {
         return this.currentUser !== null;
-    }
+    },
+
+    async isUsernameExist(username){
+        let allUsers =  await BankAPI.getAllUsers();
+        return allUsers.find(u=>u.username === username)
+    },
 
 }

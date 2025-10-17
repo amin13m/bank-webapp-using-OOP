@@ -114,18 +114,18 @@ export const BankAPI = {
     return await res.json()
   },
 
-  async getAllUsers(user){
+  async getAllUsers(){
     return await fetch(`${BASE_URL}/users`).then(res=>res.json());
   },
 
-  async addUser(){
+  async addUser(user){
     let res = fetch(`${BASE_URL}/users`, {
       method:"POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user.toJSON())
-    })
+    }).then(res=>res.json());
 
-    return await res.json()
+    return await res
   },
 
   updateUser(user){

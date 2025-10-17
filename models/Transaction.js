@@ -93,6 +93,14 @@ export let Transaction = class {
     return id.replace(/\s+/g, "");
   }
 
+  static typeOfTxForAccount(tx , accID) {
+    return  tx.fromAccount.id ===accID ? "wisdraw" : "diposit";
+  }
+
+  static typeOfTxForAccountFARSI(tx , accID) {
+    return  tx.fromAccount.id ===accID ? "برداشت" : "واریز";
+  }
+
   info() {
     return `  amount : ${this.amount} from : ${this.fromAccount.id}  to : ${this.toAccount.id}  in date : ${this.date}`;
   }

@@ -11,9 +11,9 @@ export const Events = {
   },
 
   bindUIEvents() {
-    document
-      .querySelector("#bankList")
-      .addEventListener("change", this.handleBankSelect);
+//    document
+//      .querySelector("#bankList")
+//      .addEventListener("change", this.handleBankSelect);
     document
       .querySelector("#transferForm")
       .addEventListener("submit", this.handleTransfer);
@@ -35,6 +35,12 @@ export const Events = {
     document
       .querySelector("#logoutBtn")
       .addEventListener("click",this.logoutHandler);
+    window
+      .addEventListener("scroll", this.handleScroll);
+    document
+      .querySelector("#acc-sc-accountList")
+      .addEventListener("change", this.handleAccountSelectInAccountSection);
+    
     },
 
   async handleBankSelect(e) {
@@ -46,22 +52,33 @@ export const Events = {
   handleAccountSelect(e) {
     const accountId = e.target.value;
     const account = Bank.findAccountById(accountId);
-    UI.renderAccounts(account);
+    UI.renderDasbourdTransactions(account);
+    UI.renderTransactions(account);
+    //UI.renderAccount(account);
   },
 
   async handleTransfer(e) {
     e.preventDefault();
-    const fromId = document.querySelector("#fromId").value;
-    const toId = document.querySelector("#toId").value;
-    const amount = Number(document.querySelector("#amount").value);
+   
+    const fromId = e.target.fromAccount.value;
+    const toId = e.target.toAccount.value;
+    const amount = Number(e.target.amount.value);
+
+    if(fromId == toId){
+      UI.showError("انتقال به حساب منتقل کننده وجود ندارد");
+      throw new Error("انتقال به حساب منتقل کننده وجود ندارد");
+    }
 
     try {
       await Bank.transfer(fromId, toId, amount);
       const accounts = Bank.getAllAccountsInSystem();
-      UI.renderAccounts(accounts);
-      alert("✅ انتقال با موفقیت انجام شد!");
+      UI.renderUpdate();
+
+      UI.showMsg("انتقال با موفقیت انجام شد");
+      
+      UI.showDashboard()
     } catch (err) {
-      console.error(err);
+      console.log(err);
       UI.showError("خطا در انجام تراکنش");
     }
   },
@@ -78,7 +95,7 @@ export const Events = {
         UI.showSection(sectionId);
     
       }
-    }   
+    }  
   },
 
   async loginHandler(e){
@@ -87,9 +104,10 @@ export const Events = {
     const password = e.target.password.value
     try {
       let user = await Auth.login(username , password)
-      UI.showDashboard(user)
-      
+  //    UI.showDashboard(user)
+      UI.showSection("dashboard");
       UI.showLoginBtn();
+      UI.renderElements();
     } catch (err) {
       console.log(err)
       UI.showError("login failed : " + err.message)
@@ -102,11 +120,20 @@ export const Events = {
     const password = e.target.password.value;
 
     try {
-      await Auth.register(username, password);
-      const accounts = await Bank.getAccountsForCurrentUser();
-      UI.showDashboard(Auth.currentUser);
+      let allreadyExist = await Auth.isUsernameExist(username);
+      if(allreadyExist){
+        UI.showError("نام کاربری قبلا ثبت شده است");
+      }else{
+        let user =await Auth.register(username, password);
+        
+        UI.showSection("dashboard");
+        UI.showDashboard(user)
+        UI.showLoginBtn();
+        UI.renderElements();
+      }
     } catch (err) {
-      UI.showError(err.message);
+      console.log(err)
+      UI.showError("regester failed : " + err.message);
     }
   },
 
@@ -114,6 +141,22 @@ export const Events = {
     Auth.logout()
     UI.showLoginBtn()
     UI.showSection("login")
+  },
+
+
+  handleAccountSelectInAccountSection(e){
+    const accountId = e.target.value;
+    const account = Bank.findAccountById(accountId);
+    Auth.currentAccount = account
+    UI.renderAccount();
+  },
+
+  handleScroll(){
+    const scrollTop = window.scrollY; 
+    const docHeight = document.body.scrollHeight - window.innerHeight; 
+    const scrollPercent = (scrollTop / docHeight) * 100;
+
+    document.getElementById("scroll-progress").style.width = scrollPercent + "%";
   }
 
 };

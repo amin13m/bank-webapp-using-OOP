@@ -15,42 +15,86 @@
     {
       "id": "ba4",
       "name": "sepehr"
+    },
+    {
+      "id": "ba5",
+      "name": "mybank"
     }
   ],
   "users": [
-    { "id": 1, "username": "ali", "password": "1234" },
-    { "id": 2, "username": "sara", "password": "abcd" }
+    {
+      "id": "1",
+      "username": "Ali",
+      "password": "1234"
+    },
+    {
+      "id": "2",
+      "username": "Sara",
+      "password": "abcd"
+    },
+    {
+      "id": "fadc",
+      "username": "Reza",
+      "password": "1234",
+      "role": "user"
+    },
+    {
+      "id": "f36d",
+      "username": "Alireza",
+      "password": "1234",
+      "role": "user"
+    },
+    {
+      "id": "449a",
+      "username": "Mohamad",
+      "password": "abcd",
+      "role": "user"
+    },
+    {
+      "id": "7aa3",
+      "username": "Negin",
+      "password": "abcd",
+      "role": "user"
+    },
+    {
+      "id": "17c4",
+      "username": "Ahmad",
+      "password": "1234",
+      "role": "user"
+    },
+    {
+      "id": "4a34",
+      "username": "ahmad reza",
+      "password": "1234",
+      "role": "user"
+    }
   ],
   "accounts": [
     {
       "id": "ac1",
-      "owner": "ali",
-      "password": 1234,
-      "balence": 10180,
+      "owner": "Ali",
+      "balence": 9380,
       "bankId": "ba3",
       "_type": "SavingAccount"
     },
     {
       "id": "ac2",
       "owner": "ahmad",
-      "password": "1234",
-      "balence": 12170,
+      "balence": 12370,
       "bankId": "ba1",
       "_type": "CheckingAccount"
     },
     {
       "id": "ac3",
-      "owner": "ali",
-      "password": "1234",
-      "balence": 3370,
+      "owner": "Ali",
+      "balence": 3870,
       "bankId": "ba1",
       "_type": "CheckingAccount"
     },
     {
       "id": "ac4",
-      "owner": "reza",
-      "password": "1234",
-      "balence": 10000,
+      "owner": "Reza",
+      "balence": 10100,
       "bankId": "ba2",
       "_type": "SavingAccount"
     }
@@ -126,6 +170,54 @@
       "toID": "ac2",
       "amount": 100,
       "date": "2025-10-11T14:15:37.221Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_ThuOct16202520:57:56GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac4",
+      "amount": 100,
+      "date": "2025-10-17T03:57:56.959Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_ThuOct16202521:00:14GMT-0700(PacificDaylightTime)",
+      "fromID": "ac3",
+      "toID": "ac1",
+      "amount": 200,
+      "date": "2025-10-17T04:00:14.704Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_ThuOct16202521:13:33GMT-0700(PacificDaylightTime)",
+      "fromID": "ac3",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-17T04:13:33.792Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_ThuOct16202521:18:55GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac3",
+      "amount": 700,
+      "date": "2025-10-17T04:18:55.639Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_ThuOct16202521:24:48GMT-0700(PacificDaylightTime)",
+      "fromID": "ac3",
+      "toID": "ac2",
+      "amount": 100,
+      "date": "2025-10-17T04:24:48.134Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_ThuOct16202521:25:27GMT-0700(PacificDaylightTime)",
+      "fromID": "ac1",
+      "toID": "ac3",
+      "amount": 200,
+      "date": "2025-10-17T04:25:27.152Z",
       "_type": "Transaction"
     }
   ]

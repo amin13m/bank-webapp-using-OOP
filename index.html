@@ -8,36 +8,57 @@
   </head>
   <body>
     <!--  Header -->
-    <header class="app-header">
+    <header class="app-header navbar">
       <div class="logo">🏦 بانک من</div>
       <nav class="nav">
         <button data-section="dashboard">داشبورد</button>
         <button data-section="accounts">حساب‌ها</button>
         <button data-section="transactions">تراکنش‌ها</button>
         <button data-section="transfer">انتقال وجه</button>
-        <button data-section="login" id="loginbtn" class="bouldBorder">ورود/ ثبت نام</button>
-        <button data-section="logout" id="logoutbtn" class="bouldBorder">خروج</button>
+        <button data-section="login" id="loginbtn" class="bouldBorder">
+          ورود/ ثبت نام
+        </button>
+        <button data-section="logout" id="logoutbtn" class="bouldBorder">
+          خروج
+        </button>
       </nav>
       <button id="menuBtn" class="menu-btn">☰</button>
     </header>
 
+    <!--  scroll progress -->
+    <div id="scroll-progress"></div>
+
     <!--  Main -->
     <main>
-
       <section id="login" class="active">
         <h2>ورود به حساب</h2>
         <form id="loginForm" class="login-form">
           <div class="form-group">
             <label for="username">نام کاربری:</label>
-            <input placeholder="username" type="text" class="username" name="username" required />
+            <input
+              placeholder="username"
+              type="text"
+              class="username"
+              name="username"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="password">رمز عبور:</label>
-            <input placeholder="password" type="password" class="password" name="password" required />
+            <input
+              placeholder="password"
+              type="password"
+              class="password"
+              name="password"
+              required
+            />
           </div>
-          <button type="submit">ورود</button>
+          <button class="btn" type="submit">ورود</button>
         </form>
-        <span>حساب کاربری ندارید؟ <a data-section="createAccount">ثبت نام کنید</a></span>
+        <span
+          >حساب کاربری ندارید؟
+          <a data-section="createAccount">ثبت نام کنید</a></span
+        >
       </section>
 
       <section id="createAccount" class="hidden">
@@ -45,17 +66,35 @@
         <form id="createAccountForm" class="create-account-form">
           <div class="form-group">
             <label for="email">ایمیل:</label>
-            <input placeholder="email" type="email" class="email" name="email" required />
+            <input
+              placeholder="email"
+              type="email"
+              class="email"
+              name="email"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="username">نام کاربری:</label>
-            <input placeholder="username" type="text" class="username" name="username" required />
+            <input
+              placeholder="username"
+              type="text"
+              class="username"
+              name="username"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="password">رمز عبور:</label>
-            <input placeholder="password" type="password" class="password" name="password" required />
+            <input
+              placeholder="password"
+              type="password"
+              class="password"
+              name="password"
+              required
+            />
           </div>
-          <button type="submit">ثبت نام</button>
+          <button class="btn" type="submit">ثبت نام</button>
         </form>
         <span>حساب کاربری دارید؟ <a data-section="login">ورود</a></span>
       </section>
@@ -65,26 +104,98 @@
         <button id="logoutBtn">خروج</button>
       </section>
 
-
-
-
-
       <section id="dashboard" class="active">
-        <h2>انتخاب بانک</h2>
-        <select id="bankSelect">
-          <span id="bankList"></span>
-        </select>
-        <div id="bankInfo"></div>
+        <div class="dashboard-header">
+          <span id="username"></span>
+          <h2 id="welcome">خوش آمدید</h2>
+          <button data-section="logout" id="logoutBtn" class="logoutBtn">
+            خروج
+          </button>
+        </div>
+
+        <div class="dashboard-content">
+          <div class="accounts-panel select-container">
+            <h3>💳 حساب‌های شما</h3>
+            <label for="accountList"> انتخاب حساب:</label>
+            <select id="accountList" class="account-list accountList"></select>
+
+            <div id="accountDetails" class="account-details"></div>
+          </div>
+
+          <div class="transactions-panel">
+            <h3>📜 تراکنش‌ها</h3>
+            <div class="transaction-list"></div>
+          </div>
+        </div>
       </section>
 
-      <section id="accounts" class="hidden">
-        <h2>لیست حساب‌ها</h2>
-        <div id="accountsList"></div>
+      <section id="accounts" class="hidden accounts-section">
+        <h2 class="section-title">مدیریت حساب‌ها</h2>
+
+        <!-- انتخاب حساب -->
+        <div class="account-select">
+          <label for="accountList">انتخاب حساب:</label>
+          <select id="acc-sc-accountList" class="accountList"></select>
+        </div>
+
+        <!-- اطلاعات حساب -->
+        <div id="account-info" class="account-info">
+          یک حساب را انتخواب کنید
+        </div>
+        <br />
+
+        <!-- دکمه‌های کنترل -->
+        <div class="account-actions">
+          <button class="create-btn">➕ ساخت حساب جدید</button>
+          <button class="delete-btn">🗑️ حذف حساب</button>
+        </div>
       </section>
 
-      <section id="transactions" class="hidden">
+      <section id="createBankAccount" class="create-account-section">
+        <h2 class="section-title">ساخت حساب جدید</h2>
+
+        <form id="createBankAccountForm" class="create-account-form">
+          <div class="form-group">
+            <label for="accountName">نام حساب</label>
+            <input
+              type="text"
+              id="accountName"
+              placeholder="مثلاً حساب حقوقی"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="accountType">نوع حساب</label>
+            <select id="accountType" required>
+              <option value="">انتخاب کنید</option>
+              <option value="saving">پس‌انداز</option>
+              <option value="checking">جاری</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="initialBalance">موجودی اولیه (ریال)</label>
+            <input
+              type="number"
+              id="initialBalance"
+              min="0"
+              placeholder="مثلاً 1000000"
+              required
+            />
+          </div>
+
+          <button type="submit" class="createbtn ">ایجاد حساب</button>
+        </form>-
+      </section>
+
+      <section id="transactions" class="transactions hidden">
         <h2>تراکنش‌ها</h2>
-        <div id="transactionsList"></div>
+        <div id="transactionList">
+          <span style="color: rgb(173, 60, 60)"
+            >اول یک حساب را انتخواب کنید</span
+          >
+        </div>
       </section>
 
       <section id="transfer" class="active section">
@@ -93,14 +204,21 @@
         <form id="transferForm" class="transfer-form">
           <div class="form-group">
             <label for="fromAccount">از حساب:</label>
-            <select id="fromAccount" name="fromAccount" required></select>
+            <select
+              id="fromAccount"
+              class="fromAccountList"
+              name="fromAccount"
+              required
+            ></select>
           </div>
 
           <div class="form-group">
             <label for="toAccount">به حساب:</label>
-            <select id="toAccount" name="toAccount" required>
-              <span id="accountList"></span>
-            </select>
+            <select
+              id="toAccount"
+              name="toAccount toAccountList"
+              required
+            ></select>
           </div>
 
           <div class="form-group">
@@ -109,13 +227,15 @@
               type="number"
               id="amount"
               name="amount"
-              min="1000"
-              step="1000"
+              min="100"
+              step="100"
               required
             />
           </div>
 
           <button type="submit" class="btn">انتقال</button>
+
+          <p id="transferMsg"></p>
         </form>
 
         <p id="transferMessage" class="message"></p>

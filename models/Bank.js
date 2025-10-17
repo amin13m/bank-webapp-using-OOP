@@ -165,12 +165,17 @@ export class Bank {
 
 
   static transfer(fromId, toId, amount) {
-    fromAcc=Bank.findAccountById(fromId);
-    toAcc=Bank.findAccountById(toId);
+  
+    let fromAcc=Bank.findAccountById(fromId);
+    let toAcc=Bank.findAccountById(toId);
     return Transaction.execute(fromAcc, toAcc, amount);
   }
 
   static findUsersAccounts(user) {
     return Bank.#allAccounts.filter((account) => account.owner === user.username);
+  }
+
+  static sortUserAccountByBank(bankId) {
+    return Bank.#allAccounts.filter((account) => account.bankId === bankId);
   }
 }

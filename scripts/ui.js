@@ -1,36 +1,56 @@
-
 import { Bank } from "../models/Bank.js";
 import { Auth } from "../models/Auth.js";
+import { Transaction } from "../models/Transaction.js";
 
 export const UI = {
-  init() {    
+  init() {
     this.cacheElements();
     this.setupNavigation();
     this.setupMenuToggle();
-    this.renderBankList();
     this.showLoginBtn();
+
+    this.renderElements()
+    
     console.log("🖥️ UI آماده شد");
+    
+  },
+
+  renderElements(){
+    if(Auth.isLoggedIn()){
+      this.renderAccounts() 
+      this.renderWelcome();  
+      this.renderForm();
+    }
   },
 
   setupNavigation() {
-    document.querySelectorAll("header nav button").forEach(btn => {
-      btn.addEventListener("click", e => {
+    document.querySelectorAll("header nav button").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
         this.showSection(e.target.dataset.section);
       });
     });
   },
 
-  showSection(sectionId) {
-    document.querySelectorAll("main section").forEach(sec =>
-      sec.classList.remove("active")
-    );
+  showSection(sectionId) { 
+    document
+      .querySelectorAll("main section")
+      .forEach((sec) => sec.classList.remove("active"));
     document.getElementById(sectionId).classList.add("active");
+
+    if(window.innerWidth < 768){
+      document.querySelector(".nav").classList.remove("active");
+    }
   },
 
   showLoginBtn() {
     let islogin = Auth.isLoggedIn();
-    document.querySelector("#loginbtn").style.display = islogin ? "none" : "inline flex";
-    document.querySelector("#logoutbtn").style.display = islogin ? "inline flex" : "none";
+    document.querySelector("#loginbtn").style.display = islogin
+      ? "none"
+      : "inline flex";
+    document.querySelector("#logoutbtn").style.display = islogin
+      ? "inline flex"
+      : "none";
+    
   },
 
   setupMenuToggle() {
@@ -45,54 +65,179 @@ export const UI = {
   cacheElements() {
     // catching elements
     this.bankList = document.querySelector("#bankList");
-    this.accountList = document.querySelector("#accountList");
+    this.accountList = document.querySelectorAll(".accountList");
     this.transactionList = document.querySelector("#transactionList");
+    this.fromAccountList = document.querySelector("#fromAccount");
+    this.toAccountList = document.querySelector("#toAccount");
+    
   },
 
   renderBankList() {
     const banks = Bank.getAllBanks();
-    this.bankList.innerHTML = banks.map((b )=> {
+    this.bankList.innerHTML = banks
+      .map((b) => {
         return `
         <option value="${b.id}">
-            ${b.name}
-        </option>`
-        }).join("");
+            ${b.name}  
+        </option>`;
+      })
+      .join("");
   },
 
-  renderAccounts(accounts) {
-    this.accountList.innerHTML = accounts.map((acc )=> {return`
+  renderAccounts() {
+    let accounts = Bank.findUsersAccounts(Auth.currentUser);
+    this.accountList.forEach((accList) =>{ accList.innerHTML = accounts
+      .map((acc) => {
+        return `
       <option value="${acc.id}" class="account-item" >
-        ${acc.owner} - ${acc.balance.toLocaleString()} ریال
-      </option>`}
-      )
+        ${acc.owner} -( ${String(acc.balence.toLocaleString())} تومان ) 
+      </option>`;
+      })
+      .join("");
+     })
+  },
+
+  renderAccount() {
+    let acc = Auth.currentAccount
+  
+    document.querySelector("#account-info").innerHTML=`
+          <h3>اطلاعات حساب</h3>
+          <div class="info-box">
+            <p>
+              <strong>شماره حساب:</strong>
+              <span id="accountNumber">${acc.id}</span>
+            </p>
+            <p>
+              <strong>نوع حساب:</strong> <span id="accountType">${acc.constructor.name==="SavingAccount"? "حساب پس انداز" : "حساب جاری" }</span>
+            </p>
+            <p>
+              <strong>موجودی:</strong>
+              <span id="accountBalance">${ acc.balence.toLocaleString()} تومان</span>
+            </p>
+          </div>`
+  },
+
+  async renderDasbourdTransactions(account) {
+    let transactions = await Transaction.loadAccountsTransactionsById(
+      account.id
+    );
+
+    document.querySelector("#dashboard .transaction-list").innerHTML =
+      [...transactions].reverse()
+        .map((tx) => {
+          return `
+            <div class="transaction-card">
+              <div class="transaction-header">
+                <h3 class="${Transaction.typeOfTxForAccount( tx, account.id )}"> 
+                  ${Transaction.typeOfTxForAccountFARSI( tx, account.id)}
+                </h3>
+                <span class="amount">${tx.amount.toLocaleString()}تومان</span>
+              </div>
+              <span>از: ${tx.fromAccount.id} (${tx.fromAccount.owner})</span>
+              <span>به: ${tx.toAccount.id} (${tx.toAccount.owner})</span><br>
+              <p>تاریخ: ${tx.date}</p>
+            </div>
+         `;
+        })
+        .join("");
+  },
+
+
+
+
+  async renderTransactions(account) {
+    let transactions = await Transaction.loadAccountsTransactionsById(account.id);
+
+      this.transactionList.innerHTML = [...transactions].reverse()
+        .map((tx) => {
+          return `
+          <div class="transaction-card">
+             <div class="transaction-header">
+               <h3>
+                ${Transaction.typeOfTxForAccountFARSI(tx, account.id )}
+               </h3>
+               <span class="amount expense">${tx.amount.toLocaleString()} تومان</span>
+             </div>
+             <span>از:${tx.fromAccount.owner} (${tx.fromAccount.id})</span>
+             <span>به:${tx.toAccount.owner} (${tx.toAccount.id})</span>
+             <p class="transaction-date">${tx.date}</p>
+          </div>
+        `;
+        })
+        .join("");
+    
+  },
+
+
+
+
+///// TRANSFER FORM /////
+
+  renderFromAcc() {
+    let accounts = Bank.findUsersAccounts(Auth.currentUser);
+    this.fromAccountList.innerHTML = accounts
+      .map((acc) => {
+        return `
+      <option value="${acc.id}" class="account-item" >
+        ${acc.owner} -( ${String(acc.balence.toLocaleString())} تومان ) 
+      </option>`;
+      })
       .join("");
   },
 
-  renderTransactions(transactions) {
-    this.transactionList.innerHTML = transactions
-      .map(
-        tx => {`
-      <div class="transaction-item">
-        <span>از: ${tx.fromId}</span>
-        <span>به: ${tx.toId}</span>
-        <span>مبلغ: ${tx.amount.toLocaleString()} ریال</span>
-      </div>
-      `})
+  renderToAcc() {
+    let accounts = Bank.allAccounts;
+    this.toAccountList.innerHTML = accounts
+      .map((acc) => {
+        return `
+      <option value="${acc.id}" class="account-item" >
+        ${acc.owner} -( ${String(acc.balence.toLocaleString())} تومان ) 
+      </option>`;
+      })
       .join("");
   },
+
+  renderForm() {
+    this.renderFromAcc();
+    this.renderToAcc();
+  },
+
+  renderUpdate() {
+    this.renderAccounts();
+    this.renderForm();
+  },
+
+
+  /////MSG////
 
   showError(msg) {
     alert(msg);
   },
 
-  refresh() {
-    this.renderBankList();
+  showMsg(msg) {
+    alert(msg);
   },
 
-  showDashboard(user) {
-    this.showSection("dashboard");
-    let accounts = Bank.findUsersAccounts(user)
-   // this.renderAccounts(accounts);
-    
+  refresh() {
+    this.renderAccounts(Bank.findUsersAccounts(Auth.currentUser));
   },
+
+  showDashboard() {
+    this.showSection("dashboard");
+  
+    this.renderAccounts() 
+    this.renderWelcome();  
+    this.renderForm();
+  },
+
+  renderWelcome(){
+    let name = Auth.currentUser.username
+
+    document
+      .querySelector("#welcome")
+      .innerHTML= `خوش آمدید ${name}`
+
+  },
+
+
 };
