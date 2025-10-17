@@ -1,5 +1,6 @@
 import { BankAPI } from "../scripts/api.js"
 import { Bank } from "./Bank.js"
+import { Transaction } from "./Transaction.js"
 import { User } from "./User.js"
 
 export let Auth = {
@@ -7,6 +8,22 @@ export let Auth = {
     currentAccount: null,
     currentBank: async()=>await Bank.findBankByName("mybank"),
     userThisBankAccounts: async ()=>(await Auth.currentBank()).findUsersAccounts(Auth.currentUser.username),
+    allTransactions: async ()=>{ 
+        let accs = Bank.findUsersAccounts(Auth.currentUser)
+        let allTxs = [];
+
+        for (const acc of accs) { 
+              let accTxs = await Transaction.loadAccountsTransactionsById(acc.id) 
+                accTxs.map((tx)=>{
+                allTxs.push(tx)
+              })
+            }
+
+ 
+        allTxs.sort((a, b) => b.date - a.date);
+
+        return  allTxs;
+    },
 
     async login(username, password) {
         let allUsers = await BankAPI.getAllUsers()

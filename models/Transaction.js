@@ -107,4 +107,5 @@ export let Transaction = class {
   info() {
     return `  amount : ${this.amount} from : ${this.fromAccount.id}  to : ${this.toAccount.id}  in date : ${this.date}`;
   }
+
 };

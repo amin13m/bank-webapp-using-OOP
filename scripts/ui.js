@@ -70,7 +70,7 @@ export const UI = {
     this.transactionList = document.querySelector("#transactionList");
     this.fromAccountList = document.querySelector("#fromAccount");
     this.toAccountList = document.querySelector("#toAccount");
-    
+    this.renderTransactions()
   },
 
   renderBankList() {
@@ -149,7 +149,7 @@ export const UI = {
 
 
   async renderTransactions(account) {
-    let transactions = await Transaction.loadAccountsTransactionsById(account.id);
+    let transactions = await Auth.allTransactions();
 
       this.transactionList.innerHTML = [...transactions].reverse()
         .map((tx) => {
@@ -157,10 +157,11 @@ export const UI = {
           <div class="transaction-card">
              <div class="transaction-header">
                <h3>
-                ${Transaction.typeOfTxForAccountFARSI(tx, account.id )}
+
                </h3>
                <span class="amount expense">${tx.amount.toLocaleString()} تومان</span>
              </div>
+             <br>
              <span>از:${tx.fromAccount.owner} (شماره حساب :${tx.fromAccount.id} , بانک :${Bank.findBankById(tx.fromAccount.bankId).name})</span>
              <br>
              <span>به:${tx.toAccount.owner} (شماره حساب :${tx.toAccount.id}  , بانک :${Bank.findBankById(tx.toAccount.bankId).name})</span>
