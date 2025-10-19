@@ -1,5 +1,6 @@
 
 // json-server --watch db.json
+import { deletedAccount } from "../models/Accounts.js";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -79,6 +80,21 @@ export const BankAPI = {
   },
 
   async deleteAccountById(id) {
+    let account = new deletedAccount();
+    
+    await this.deleteAccount(id);
+
+    const res = await fetch(`${BASE_URL}/accounts/${account.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(this.serialize(account)),
+    }).then(res=> res.json()); 
+   
+    return await res;
+  },
+
+
+  async deleteAccount(id) {
     await fetch(`${BASE_URL}/accounts/${id}`, { method: "DELETE" });
   },
 

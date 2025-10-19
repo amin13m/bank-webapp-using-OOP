@@ -46,6 +46,15 @@ export const Events = {
     document
       .querySelector("#createBankAccountForm")
       .addEventListener("submit", this.handleCreateBankAccountForm);
+    document
+      .querySelector("#deleteBankAccountBtn")
+      .addEventListener("click", this.handleDeleteBankAccountBtn);
+    document
+      .querySelector("#agreeDeleteBankAccountBtn")
+      .addEventListener("click", this.handleAgreeDeleteBankAccountBtn);
+    document
+      .querySelector("#cancelDeleteBankAccountBtn")
+      .addEventListener("click" , this.handleCancelDeleteBankAccountBtn);
     },
 
   async handleBankSelect(e) {
@@ -141,6 +150,52 @@ export const Events = {
       UI.showError("regester failed : " + err.message);
     }
   },
+
+  async handleDeleteBankAccountBtn(e){
+    if(Auth.currentAccount === null){
+      UI.showError("حسابی برای حذف انتخاب نشده است");
+    }else{
+      e.preventDefault();
+      UI.rendershowDLTAccountDescription();
+      UI.showSection("agreeDeleteBankAccount")
+    }
+  },
+
+
+  async handleAgreeDeleteBankAccountBtn(e){
+    e.preventDefault();
+    const accountId = Auth.currentAccount.id
+    const agree = document.querySelector("#agreeDeleteAccountInput").checked
+    if(!agree){
+      UI.showError("لطفا اول با حذف حساب موافت کنید");
+      
+      return
+    }
+    try {
+      await Bank.deleteAccount(accountId);
+      await Bank.loadAllFromServer()
+      UI.showMsg("حساب با موفقیت حذف شد");
+      UI.renderElements();
+      UI.showSection("accounts");
+
+      Auth.currentAccount = null
+    } catch (err) {
+      console.log(err)
+      UI.showError("حذف حساب با خطا مواجه شد");
+    }
+
+  },
+
+  
+
+  handleCancelDeleteBankAccountBtn(e){
+    e.preventDefault()
+    UI.showSection("accounts")
+  },
+
+
+   
+  
 
   logoutHandler(){
     Auth.logout()

@@ -118,7 +118,8 @@ export const UI = {
           </div>`
   },
 
-  async renderDasbourdTransactions(account) {
+  async renderDasbourdTransactions(account= Auth.currentAccount) {
+    
     let transactions = await Transaction.loadAccountsTransactionsById(
       account.id
     );
@@ -162,9 +163,9 @@ export const UI = {
                <span class="amount expense">${tx.amount.toLocaleString()} تومان</span>
              </div>
              <br>
-             <span>از:${tx.fromAccount.owner} (شماره حساب :${tx.fromAccount.id} , بانک :${Bank.findBankById(tx.fromAccount.bankId).name})</span>
+             <span>از:${tx.fromAccount.owner} (شماره حساب :${tx.fromAccount.id} , بانک :${Bank.findBankById(tx.fromAccount.bankId)?Bank.findBankById(tx.fromAccount.bankId).name:"نامشخص"})</span>
              <br>
-             <span>به:${tx.toAccount.owner} (شماره حساب :${tx.toAccount.id}  , بانک :${Bank.findBankById(tx.toAccount.bankId).name})</span>
+             <span>به:${tx.toAccount.owner} (شماره حساب :${tx.toAccount.id}  , بانک :${Bank.findBankById(tx.toAccount.bankId)?Bank.findBankById(tx.toAccount.bankId).name:"نامشخص"})</span>
              <p class="transaction-date">تاریخ: ${tx.date.getFullYear()}:${ tx.date.getMonth()}:${ tx.date.getDate() } ساعت : ${ tx.date.getHours()}:${tx.date.getMinutes()}</p>
           </div>
         `;
@@ -174,6 +175,29 @@ export const UI = {
   },
 
 
+
+  rendershowDLTAccountDescription() {
+    let currentAccount = Auth.currentAccount
+    document
+      .querySelector("#showDLTAccountDescription")
+      .innerHTML = `
+      <h2 class="section-title">آیا مطمئن هستید؟<input id="agreeDeleteAccountInput" type="checkbox"></h2>
+      <div class="info-box">
+      <br>
+        <p>
+          <strong>شماره حساب:</strong>
+          <span id="accountNumber">${currentAccount.id}</span>
+        </p>
+        <p>
+          <strong>نوع حساب:</strong> <span id="accountType">${currentAccount.constructor.name==="SavingAccount"? "حساب پس انداز" : "حساب جاری" }</span>
+        </p>
+        <p>
+          <strong>موجودی:</strong>
+          <span id="accountBalance">${ currentAccount.balence.toLocaleString()} تومان</span>
+        </p>
+      </div>
+      <br><br>`
+  },
 
 
 ///// TRANSFER FORM /////
@@ -194,6 +218,7 @@ export const UI = {
     let accounts = Bank.allAccounts;
     this.toAccountList.innerHTML = accounts
       .map((acc) => {
+        if(acc.id ==="account-has-been-deleted") return
         return `
       <option value="${acc.id}" class="account-item" >
         ${acc.owner} -( ${String(acc.balence.toLocaleString())} تومان ) 

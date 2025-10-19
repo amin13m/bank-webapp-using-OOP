@@ -1,11 +1,12 @@
 import { BankAPI } from "../scripts/api.js";
 import { Bank } from "./Bank.js";
+import { deletedAccount } from "./Accounts.js";
 
 export let Transaction = class {
   constructor(
     id = Transaction.generateId(),
-    fromACC,
-    toACC,
+    fromACC ,
+    toACC ,
     amount,
     date = new Date()
   ) {
@@ -67,11 +68,11 @@ export let Transaction = class {
   }
 
   static fromJSON(data){
-     
+ 
     return new Transaction(
       data.id,
-      Bank.findAccountById(data.fromID),
-      Bank.findAccountById(data.toID),
+      Bank.findAccountById(data.fromID) ? Bank.findAccountById(data.fromID) : new deletedAccount(),
+      Bank.findAccountById(data.toID) ? Bank.findAccountById(data.toID) : new deletedAccount(),
       data.amount,
       new Date(data.date)
     )

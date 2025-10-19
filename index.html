@@ -121,7 +121,28 @@
 
             <div id="accountDetails" class="account-details"></div>
           </div>
+<!--
+          <div class="tx-card" id="txCard">
+            <div class="tx-header">
+              <div>
+                <h4>تراکنش‌ها (۷ روز گذشته)</h4>
+                <div class="tx-sub">
+                  اکانت: <strong id="acctName">حساب پس‌انداز</strong>
+                </div>
+              </div>
+              <div class="tx-stats" id="txChange">+1,250,000 ریال</div>
+            </div>
 
+            <div class="tx-chart-wrap">
+              <svg
+                id="txSpark"
+                viewBox="0 0 300 80"
+                preserveAspectRatio="none"
+              ></svg>
+              <div class="tx-tooltip" id="txTooltip" aria-hidden="true"></div>
+            </div>
+          </div>
+-->
           <div class="transactions-panel">
             <h3>📜 تراکنش‌ها</h3>
             <div class="transaction-list"></div>
@@ -146,8 +167,29 @@
 
         <!-- دکمه‌های کنترل -->
         <div class="account-actions">
-          <button id="createBankAccountBtn" class="create-btn">➕ ساخت حساب جدید</button>
-          <button id="deleteBankAccountBtn" class="delete-btn">🗑️ حذف حساب</button>
+          <button id="createBankAccountBtn" class="create-btn">
+            ➕ ساخت حساب جدید
+          </button>
+          <button id="deleteBankAccountBtn" class="delete-btn">
+            🗑️ حذف حساب
+          </button>
+        </div>
+      </section>
+
+
+      <section id="agreeDeleteBankAccount">
+        
+        <span id="showDLTAccountDescription">
+
+        </span>
+        <div class="account-actions">
+
+          <button id="agreeDeleteBankAccountBtn" class="delete-btn">
+            🗑️ حذف حساب
+          </button>
+          <button id="cancelDeleteBankAccountBtn" class="cancel-btn">
+            انصراف
+          </button>
         </div>
       </section>
 
@@ -155,17 +197,7 @@
         <h2 class="section-title">ساخت حساب جدید</h2>
 
         <form id="createBankAccountForm" class="create-account-form">
- <!--        
-          <div class="form-group">
-            <label for="accountName">نام حساب</label>
-            <input
-              type="text"
-              id="accountName"
-              placeholder="مثلاً حساب حقوقی"
-              required
-            />
-          </div>
--->
+
           <div class="form-group">
             <label for="accountType">نوع حساب</label>
             <select id="accountType" required>
@@ -179,6 +211,7 @@
             <input
               type="number"
               id="initialBalance"
+              step="1000"
               min="1000"
               placeholder=" مبلغ سپرده"
               required
@@ -186,7 +219,8 @@
           </div>
 
           <button type="submit" class="createbtn create-btn">ایجاد حساب</button>
-        </form>-
+        </form>
+        -
       </section>
 
       <section id="transactions" class="transactions hidden">

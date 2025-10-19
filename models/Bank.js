@@ -1,5 +1,5 @@
 import { BankAPI } from "../scripts/api.js";
-import { SavingAccount, CheckingAccount, BankAccount } from "./accounts.js";
+import { SavingAccount, CheckingAccount, BankAccount  } from "./Accounts.js";
 import { Transaction } from "./Transaction.js";
 
 export class Bank {
@@ -168,6 +168,20 @@ export class Bank {
     await BankAPI.addAccount(acc);
 
     return acc;
+  }
+
+
+  static async deleteAccount(id) {
+    try {
+
+      Bank.#allAccounts = Bank.#allAccounts
+        .filter((account) => account.id !== id);
+
+      await BankAPI.deleteAccountById(id);
+
+    } catch (err) {
+      console.log(err)
+    }
   }
 
 

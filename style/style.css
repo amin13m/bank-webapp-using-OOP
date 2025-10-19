@@ -992,3 +992,119 @@ section {
   animation: fadeInForm 0.6s ease forwards;
 }
 
+
+
+
+/* transaction card */
+
+.tx-card {
+  width: 320px;
+  background: linear-gradient(180deg,#ffffff,#f6fbff);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 8px 24px rgba(3,100,200,0.08);
+  font-family: "IRANSans", system-ui, -apple-system, "Segoe UI", Roboto;
+  color: #123;
+}
+
+.tx-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.tx-header h4 {
+  margin:0;
+  font-size:1rem;
+  color:#0b3a66;
+}
+.tx-sub { font-size:0.84rem; color:#5b6b80; }
+
+.tx-stats {
+  font-weight:700;
+  color:#0a84ff;
+  background: linear-gradient(90deg, rgba(0,180,219,0.12), rgba(0,131,176,0.06));
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:0.9rem;
+}
+
+.tx-chart-wrap {
+  position:relative;
+  height: 80px;
+  width: 100%;
+}
+
+/* SVG full size */
+#txSpark {
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+/* مسیر نمودار */
+.path-line {
+  fill: none;
+  stroke: url(#g); /* gradient via defs */
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 4px 10px rgba(3, 100, 200, 0.12));
+  transition: stroke 0.25s ease;
+}
+
+/* پر کردن زیر نمودار با گرادیان ملایم */
+.path-fill {
+  fill: url(#gFill);
+  opacity: 0.18;
+}
+
+/* نقاط روی نمودار */
+.dot {
+  fill: white;
+  stroke: #0a84ff;
+  stroke-width: 1.6;
+  r: 3;
+  transition: transform .12s ease;
+}
+
+/* tooltip */
+.tx-tooltip {
+  position:absolute;
+  pointer-events:none;
+  background:#0b3a66;
+  color:#fff;
+  padding:6px 8px;
+  border-radius:6px;
+  font-size:0.82rem;
+  transform: translate(-50%, -120%);
+  white-space:nowrap;
+  box-shadow: 0 6px 18px rgba(3,100,200,0.18);
+  opacity:0;
+  transition:opacity .12s ease;
+}
+
+.tx-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #0b3a66;
+}
+
+.cancel-btn {
+  background: linear-gradient(90deg, #00b4db, #0083b0);
+  color: white;
+}
+
+.cancel-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 130, 255, 0.25);
+}

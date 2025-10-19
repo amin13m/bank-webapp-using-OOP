@@ -1,6 +1,10 @@
 {
   "banks": [
     {
+      "id": "0",
+      "name": "unknown"
+    },
+    {
       "id": "ba1",
       "name": "mellat"
     },
@@ -71,16 +75,23 @@
   ],
   "accounts": [
     {
+      "id": "account-has-been-deleted",
+      "owner": "account has been deleted",
+      "balence": 0,
+      "userID": "0",
+      "BankAPI": "0"
+    },
+    {
       "id": "AC_20259171283656",
       "owner": "Ali",
-      "balence": 9480,
+      "balence": 9380,
       "bankId": "ba5",
       "_type": "SavingAccount"
     },
     {
       "id": "AC_202591712845949",
       "owner": "ahmad",
-      "balence": 13070,
+      "balence": 13170,
       "bankId": "ba1",
       "_type": "CheckingAccount"
     },
@@ -102,7 +113,7 @@
       "id": "AC_202591712913203",
       "owner": "Ali",
       "userID": "ac1",
-      "balence": 99500,
+      "balence": 99300,
       "bankId": "ba5",
       "_type": "CheckingAccount"
     }
@@ -330,6 +341,22 @@
       "toID": "AC_202591712845949",
       "amount": 100,
       "date": "2025-10-17T19:45:15.497Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_20259192317289",
+      "fromID": "AC_20259171283656",
+      "toID": "AC_202591712845949",
+      "amount": 100,
+      "date": "2025-10-19T09:31:07.289Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_2025919105025828",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_202591910464358",
+      "amount": 200,
+      "date": "2025-10-19T17:50:25.828Z",
       "_type": "Transaction"
     }
   ]

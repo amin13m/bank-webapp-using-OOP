@@ -35,7 +35,9 @@ export class BankAccount  {
             return new SavingAccount(obj.id , obj.owner , obj.userID , obj.balence , obj.bankId )
         }else if(obj._type === "CheckingAccount"){
             return new CheckingAccount(obj.id , obj.owner , obj.userID , obj.balence , obj.bankId )
-        } 
+        }else{
+            return new deletedAccount()
+        }
     }
 
     deposit(amount ){
@@ -104,3 +106,19 @@ export class CheckingAccount extends BankAccount{
     }
 }
 
+
+
+
+export class deletedAccount {
+    constructor(){
+        this.id = "account-has-been-deleted"
+        this.owner = "account has been deleted" 
+        this.balence= 0
+        this.userID = "0"
+        this.BankAPI ="0"
+    }
+
+    fromJSON(obj){
+        return new deletedAccount()
+    }
+}
