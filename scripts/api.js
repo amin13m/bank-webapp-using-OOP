@@ -121,6 +121,29 @@ export const BankAPI = {
     return await res.json();
   },
 
+  // گرفتن تراکنش‌های هفته گذشته برای یک کاربر
+  async getWeeklyTransactions(userId) {
+    const allTransactions = await this.getAllTransactions();
+
+    // تاریخ امروز و 7 روز قبل
+    const today = new Date();
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - 6); // شامل امروز
+
+    // فیلتر تراکنش‌های کاربر و 7 روز گذشته
+    const weeklyTransactions = allTransactions.filter(t => {
+      const txDate = new Date(t.date);
+      const isInRange = txDate >= sevenDaysAgo && txDate <= today;
+
+      if(t.fromID === userId || t.toID === userId){
+     
+      return isInRange
+      } ;
+    });
+
+    return weeklyTransactions;
+  },
+
 
 
   ////////USER///////

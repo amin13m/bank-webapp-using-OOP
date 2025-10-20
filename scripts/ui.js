@@ -91,7 +91,7 @@ export const UI = {
       .map((acc) => {
         return `
       <option value="${acc.id}" class="account-item" >
-        ${acc.owner} -( ${String(acc.balence.toLocaleString())} تومان ) 
+        ${acc.id} -( ${String(acc.balence.toLocaleString())} تومان ) 
       </option>`;
       })
       .join("");

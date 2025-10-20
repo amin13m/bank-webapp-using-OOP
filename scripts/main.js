@@ -3,7 +3,7 @@ import { Transaction } from "../models/Transaction.js";
 import { Events } from "./events.js";
 import { UI } from "./ui.js";
 import { Auth } from "../models/Auth.js";
-
+import { Charts } from "./chart.js";
 
 
 document.addEventListener("DOMContentLoaded",
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded",
       console.log("data loading")
 
       await Bank.loadAllFromServer()
+
 
       Auth.loadUser()
       if(!Auth.isLoggedIn()){

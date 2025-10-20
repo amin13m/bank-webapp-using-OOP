@@ -3,6 +3,7 @@ import { UI } from "./ui.js"
 import { Bank} from "../models/Bank.js"
 import { BankAPI } from "../scripts/api.js"
 import { Auth } from "../models/Auth.js";
+import { Charts } from "./chart.js";
 
 export const Events = {
   init() {
@@ -68,7 +69,10 @@ export const Events = {
     const account = Bank.findAccountById(accountId);
     UI.renderDasbourdTransactions(account);
     UI.renderTransactions(account);
-    //UI.renderAccount(account);
+
+    if(Charts.curentChart!==undefined)Charts.curentChart.destroy()
+    Charts.renderWeeklyChart(accountId)
+      //UI.renderAccount(account);
   },
 
   async handleTransfer(e) {
@@ -168,7 +172,7 @@ export const Events = {
     const agree = document.querySelector("#agreeDeleteAccountInput").checked
     if(!agree){
       UI.showError("لطفا اول با حذف حساب موافت کنید");
-      
+
       return
     }
     try {
