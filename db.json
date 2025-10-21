@@ -84,14 +84,14 @@
     {
       "id": "AC_20259171283656",
       "owner": "Ali",
-      "balence": 9880,
+      "balence": 10280,
       "bankId": "ba5",
       "_type": "SavingAccount"
     },
     {
       "id": "AC_202591712845949",
       "owner": "ahmad",
-      "balence": 13370,
+      "balence": 15570,
       "bankId": "ba1",
       "_type": "CheckingAccount"
     },
@@ -113,7 +113,7 @@
       "id": "AC_202591712913203",
       "owner": "Ali",
       "userID": "ac1",
-      "balence": 98600,
+      "balence": 8460,
       "bankId": "ba5",
       "_type": "CheckingAccount"
     }
@@ -389,6 +389,38 @@
       "toID": "AC_20259171283656",
       "amount": 200,
       "date": "2025-10-20T08:27:05.372Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592111503489",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_20259171283656",
+      "amount": 400,
+      "date": "2025-10-21T18:50:34.089Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592111513457",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_202591712845949",
+      "amount": 400,
+      "date": "2025-10-21T18:51:34.057Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_2025921115152446",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_202591712845949",
+      "amount": 400,
+      "date": "2025-10-21T18:51:52.446Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_2025921115225437",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_202591712845949",
+      "amount": 1400,
+      "date": "2025-10-21T18:52:25.437Z",
       "_type": "Transaction"
     }
   ]

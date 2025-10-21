@@ -69,7 +69,7 @@ export const Events = {
     const account = Bank.findAccountById(accountId);
     UI.renderDasbourdTransactions(account);
     UI.renderTransactions(account);
-
+  
     if(Charts.curentChart!==undefined)Charts.curentChart.destroy()
     Charts.renderWeeklyChart(accountId)
       //UI.renderAccount(account);

@@ -106,8 +106,7 @@
       </section>
 
       <section id="dashboard" class="active">
-
-          <div class="dashboard-header">
+        <div class="dashboard-header">
           <span id="username"></span>
           <h2 id="welcome">خوش آمدید</h2>
           <button data-section="logout" id="logoutBtn" class="logoutBtn">
@@ -115,15 +114,21 @@
           </button>
         </div>
 
+        <div id="charts" class="hidden">
         
-        
-        
-<div class="dashboard-charts" style="display: none;">
+          <div class="dashboard-charts" style="display: none">
             <div class="chart-card">
               <canvas id="weeklyTransactionsChart"></canvas>
             </div>
           </div>
-         
+
+          <div id="balanceChart" >
+            <div class="chart-container small">
+              <canvas id="balancePieChart"></canvas>
+            </div>
+          </div>
+
+        </div>
 
         <div class="dashboard-content">
           <div class="accounts-panel select-container">
@@ -133,7 +138,6 @@
 
             <div id="accountDetails" class="account-details"></div>
           </div>
-
 
           <div class="transactions-panel">
             <h3>📜 تراکنش‌ها</h3>
@@ -168,14 +172,9 @@
         </div>
       </section>
 
-
       <section id="agreeDeleteBankAccount">
-        
-        <span id="showDLTAccountDescription">
-
-        </span>
+        <span id="showDLTAccountDescription"> </span>
         <div class="account-actions">
-
           <button id="agreeDeleteBankAccountBtn" class="delete-btn">
             🗑️ حذف حساب
           </button>
@@ -189,7 +188,6 @@
         <h2 class="section-title">ساخت حساب جدید</h2>
 
         <form id="createBankAccountForm" class="create-account-form">
-
           <div class="form-group">
             <label for="accountType">نوع حساب</label>
             <select id="accountType" required>

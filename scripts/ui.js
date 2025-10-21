@@ -1,6 +1,7 @@
 import { Bank } from "../models/Bank.js";
 import { Auth } from "../models/Auth.js";
 import { Transaction } from "../models/Transaction.js";
+import { Charts } from "./chart.js";
 
 export const UI = {
   init() {
@@ -20,8 +21,10 @@ export const UI = {
       this.renderAccounts() 
       this.renderWelcome();  
       this.renderForm();
+      Charts.renderBalancePie()
       if(Auth.currentAccount!==null) this.renderDasbourdTransactions()
-    }
+    
+      }
   },
 
   setupNavigation() {

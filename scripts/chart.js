@@ -1,14 +1,19 @@
 import { BankAPI } from "./api.js";
+import { Bank } from "../models/Bank.js";
+import { Auth } from "../models/Auth.js";
+
 
 export class Charts {
-    static curentChart
-    constructor() {
-    }
+  static curentChart;
+  static curentPieChart
+  constructor() {}
   static async renderWeeklyChart(userId) {
+    if (Charts.curentChart === undefined)
+      document.querySelector(".dashboard-charts").style.display = "flex";
 
-    if(Charts.curentChart===undefined)document.querySelector(".dashboard-charts").style.display = "flex";
-
-    const ctx = document.getElementById("weeklyTransactionsChart");
+    const ctx = document
+      .getElementById("weeklyTransactionsChart")
+      .getContext("2d");
     if (!ctx) return console.error("❌ canvas پیدا نشد");
 
     const transactions = await BankAPI.getWeeklyTransactions(userId);
@@ -36,37 +41,54 @@ export class Charts {
       if (t.toID === userId) deposits[index] += t.amount;
       if (t.fromID === userId) withdraws[index] += t.amount;
     });
-   
+
     // محاسبه بالانس (واریز - برداشت)
     for (let i = 0; i < 7; i++) {
       balances[i] = deposits[i] - withdraws[i];
     }
 
+    const gradientGreen = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height); 
+    gradientGreen.addColorStop(0, "rgba(46, 204, 112, 1)"); 
+    gradientGreen.addColorStop(1, "rgba(46, 204, 112, 0.49)"); 
+
+    const gradientRed = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height); 
+    gradientRed.addColorStop(0, "rgba(231, 76, 60, 1)"); 
+    gradientRed.addColorStop(1, "rgba(231, 77, 60, 0.53)"); 
+
+const gradientBlue = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height); 
+    gradientBlue.addColorStop(0, "rgba(52, 152, 219, 0.06)"); 
+    gradientBlue.addColorStop(1, "rgba(52, 152, 219, 0.36)"); 
+
+    if(this.curentChart !== undefined)this.curentChart.destroy()
+
     this.curentChart = new Chart(ctx, {
       type: "bar",
       data: {
+
         labels: days.map((d) => d.slice(5)), // فقط ماه و روز
         datasets: [
           {
             label: "واریز",
             data: deposits,
-            backgroundColor: "rgba(46, 204, 113, 0.6)",
+            backgroundColor: gradientGreen,
             borderColor: "rgba(46, 204, 113, 1)",
             borderWidth: 1,
+            borderRadius: 10
           },
           {
             label: "برداشت",
             data: withdraws,
-            backgroundColor: "rgba(231, 76, 60, 0.6)",
+            backgroundColor: gradientRed,
             borderColor: "rgba(231, 76, 60, 1)",
             borderWidth: 1,
+            borderRadius: 10
           },
           {
             label: "تغییر موجودی",
             data: balances,
             type: "line",
             borderColor: "rgba(52, 152, 219, 1)",
-            backgroundColor: "rgba(52, 152, 219, 0.1)",
+            backgroundColor: gradientBlue,
             tension: 0.3,
             fill: true,
           },
@@ -108,6 +130,8 @@ export class Charts {
                 size: Math.max(11, ctx.chart.width / 70),
                 family: "Vazirmatn, sans-serif",
               }),
+              usePointStyle: true, 
+              pointStyle: 'circle',
             },
           },
           tooltip: {
@@ -151,9 +175,13 @@ export class Charts {
     });
     console.log(dataPerDay);
 
+
+
     const ctx = document
       .querySelector("#weeklyTransactionsChart")
       .getContext("2d");
+
+
 
     new Chart(ctx, {
       type: "bar",
@@ -171,7 +199,11 @@ export class Charts {
       options: {
         responsive: true,
         plugins: {
-          legend: { display: false },
+          legend: { 
+            display: false ,
+            usePointStyle: true, 
+            pointStyle: 'circle',
+        },
           tooltip: {
             callbacks: {
               label: function (context) {
@@ -199,73 +231,86 @@ export class Charts {
     });
   }
 
-  static BankChart = class {
-    constructor(canvasId, dataPerDay) {
-      // آرایه برچسب روزهای هفته (انگلیسی)
-      const days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
 
-      // گرفتن context از canvas
-      const ctx = document.querySelector("#" + canvasId)?.getContext("2d");
-      console.log(ctx);
-      if (!ctx) {
-        console.error(`❌ Canvas with id "${canvasId}" not found!`);
-        return;
-      }
 
-      // ساخت چارت
-      this.chart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: days,
-          datasets: [
-            {
-              label: "تراکنش‌ها (تومان)",
-              data: dataPerDay,
-              backgroundColor: "#3182ce",
-              hoverBackgroundColor: "#63b3ed",
-              borderRadius: 8,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          animation: {
-            duration: 800,
-            easing: "easeOutQuart",
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-            title: {
-              display: true,
-              text: "تراکنش‌های هفتگی",
-              color: "#2d3748",
-              font: { size: 18, weight: "bold" },
-            },
-            tooltip: {
-              backgroundColor: "#2b6cb0",
-              titleFont: { size: 14 },
-              bodyFont: { size: 13 },
-              callbacks: {
-                label: (context) =>
-                  `${context.parsed.y.toLocaleString()} تومان`,
-              },
-            },
-          },
-          scales: {
-            x: {
-              grid: { display: false },
-            },
-            y: {
-              beginAtZero: true,
-              ticks: {
-                callback: (value) => value.toLocaleString() + " تومان",
-              },
-            },
-          },
-        },
-      });
+///////pie chart
+
+  
+
+  static async renderBalancePie() {
+    document.querySelector("#charts")
+      .classList.remove("hidden");
+
+    const ctx = document.getElementById("balancePieChart").getContext("2d");
+    if (!ctx) return console.error("❌ canvas برای Pie Chart پیدا نشد");
+
+       const gradientGreen = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height); 
+    gradientGreen.addColorStop(0, "rgba(46, 204, 112, 0.29)"); 
+    gradientGreen.addColorStop(1, "rgba(204, 207, 3, 1)"); 
+
+    const gradientRed = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height); 
+    gradientRed.addColorStop(0, "rgba(231, 77, 60, 0.27)"); 
+    gradientRed.addColorStop(1, "rgba(238, 78, 4, 1)"); 
+
+const gradientBlue = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height); 
+    gradientBlue.addColorStop(0, "rgba(52, 105, 219, 0.2)"); 
+    gradientBlue.addColorStop(1, "rgba(0, 4, 223, 1)"); 
+
+
+
+
+    // فرض بر این که اکانت‌های یوزر از بانک گرفته می‌شوند
+    
+    const userAccounts = Bank.findUsersAccounts(Auth.currentUser);
+
+    if (userAccounts.length === 0) {
+      console.warn("⚠️ هیچ حسابی برای کاربر وجود ندارد");
+      return;
     }
-  };
+
+    const labels = userAccounts.map(acc =>  acc.id);
+    const balances = userAccounts.map(acc => acc.balence);
+
+    if(this.curentPieChart !== undefined)this.curentPieChart.destroy()
+
+    this.curentPieChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "موجودی حساب‌ها",
+            data: balances,
+            backgroundColor: [
+              gradientBlue,
+              gradientGreen,
+              gradientRed,
+              "rgba(231, 60, 217, 0.7)"
+            ],
+            borderColor: "#fff",
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "right",
+            labels: {  
+                font: { family: "IRANSans", size: 10 } ,
+                usePointStyle: true, 
+                pointStyle: 'circle', //  دایره‌ای ('rect', 'triangle', 'rectRounded', 'rectRot', 'cross', 'star', 'line')
+            }
+            
+        },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.label}: (${ctx.parsed.toLocaleString()} تومان)`
+            }
+          },
+        }
+      }
+    });
+  }
 }
