@@ -52,6 +52,7 @@ export let Auth = {
 
     logout() {
         this.currentUser = null;
+        this.currentAccount =null;
         localStorage.removeItem("currentUser");
     },
 

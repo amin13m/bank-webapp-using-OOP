@@ -7,246 +7,221 @@
     <link rel="stylesheet" href="style/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
+
   <body>
-    <!--  Header -->
-    <header class="app-header navbar">
+    <!-- HEADER / SIDEBAR -->
+    <header class="app-header">
       <div class="logo">🏦 بانک من</div>
+
+      <!-- ناوبری -->
       <nav class="nav">
-        <button data-section="dashboard">داشبورد</button>
-        <button data-section="accounts">حساب‌ها</button>
-        <button data-section="transactions">تراکنش‌ها</button>
-        <button data-section="transfer">انتقال وجه</button>
-        <button data-section="login" id="loginbtn" class="bouldBorder">
-          ورود/ ثبت نام
+        <button data-section="dashboard" class="nav-item active">
+          داشبورد
         </button>
-        <button data-section="logout" id="logoutbtn" class="bouldBorder">
+        <button data-section="accounts" class="nav-item">حساب‌ها</button>
+        <button data-section="transactions" class="nav-item">تراکنش‌ها</button>
+        <button data-section="transfer" class="nav-item">انتقال وجه</button>
+        <button data-section="login" id="loginbtn" class="nav-item">
+          ورود / ثبت‌نام
+        </button>
+        <button data-section="logout" id="logoutbtn" class="nav-item">
           خروج
         </button>
       </nav>
-      <button id="menuBtn" class="menu-btn">☰</button>
-    </header>
 
-    <!--  scroll progress -->
+      <!-- همبرگر -->
+    </header>
+    <button id="menuBtn" class="menu-btn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <!-- نوار پیشرفت اسکرول -->
     <div id="scroll-progress"></div>
 
-    <!--  Main -->
-    <main>
-      <section id="login" class="active">
-        <h2>ورود به حساب</h2>
-        <form id="loginForm" class="login-form">
-          <div class="form-group">
-            <label for="username">نام کاربری:</label>
-            <input
-              placeholder="username"
-              type="text"
-              class="username"
-              name="username"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">رمز عبور:</label>
-            <input
-              placeholder="password"
-              type="password"
-              class="password"
-              name="password"
-              required
-            />
-          </div>
-          <button class="btn" type="submit">ورود</button>
-        </form>
-        <span
-          >حساب کاربری ندارید؟
-          <a data-section="createAccount">ثبت نام کنید</a></span
-        >
-      </section>
-
-      <section id="createAccount" class="hidden">
-        <h2>ثبت نام</h2>
-        <form id="createAccountForm" class="create-account-form">
-          <div class="form-group">
-            <label for="email">ایمیل:</label>
-            <input
-              placeholder="email"
-              type="email"
-              class="email"
-              name="email"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="username">نام کاربری:</label>
-            <input
-              placeholder="username"
-              type="text"
-              class="username"
-              name="username"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">رمز عبور:</label>
-            <input
-              placeholder="password"
-              type="password"
-              class="password"
-              name="password"
-              required
-            />
-          </div>
-          <button class="btn" type="submit">ثبت نام</button>
-        </form>
-        <span>حساب کاربری دارید؟ <a data-section="login">ورود</a></span>
-      </section>
-
-      <section id="logout" class="hidden">
-        <h2>خروج از حساب</h2>
-        <button id="logoutBtn">خروج</button>
-      </section>
-
-      <section id="dashboard" class="active">
-        <div class="dashboard-header">
-          <span id="username"></span>
-          <h2 id="welcome">خوش آمدید</h2>
-          <button data-section="logout" id="logoutBtn" class="logoutBtn">
-            خروج
-          </button>
+    <!-- MAIN APP AREA -->
+    <main class="app-main">
+      <!-- SECTION: LOGIN -->
+      <section id="login" class="section active">
+        <div class="auth-card">
+          <h2>ورود به حساب</h2>
+          <br>
+          <form id="loginForm" class="form">
+            <div class="form-group">
+              <label>نام کاربری</label>
+              <input name="username" placeholder="username" required />
+            </div>
+            <div class="form-group">
+              <label>رمز عبور</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn--primary">ورود</button>
+          </form>
+          <p class="muted">
+            حساب کاربری ندارید؟
+            <a data-section="createAccount">ثبت‌نام کنید</a>
+          </p>
         </div>
+      </section>
 
-        <div id="charts" class="hidden">
-        
-          <div class="dashboard-charts" style="display: none">
-            <div class="chart-card">
+      <!-- SECTION: CREATE ACCOUNT -->
+      <section id="createAccount" class="section hidden">
+        <div class="auth-card">
+          <h2>ثبت‌نام</h2>
+          <br>
+          <form id="createAccountForm" class="form">
+            <div class="form-group">
+              <label>ایمیل</label>
+              <input type="email" name="email" placeholder="email" required />
+            </div>
+            <div class="form-group">
+              <label>نام کاربری</label>
+              <input name="username" placeholder="username" required />
+            </div>
+            <div class="form-group">
+              <label>رمز عبور</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn--primary">ثبت‌نام</button>
+          </form>
+          <p class="muted">حساب دارید؟ <a data-section="login">ورود کنید</a></p>
+        </div>
+      </section>
+
+      <!-- SECTION: DASHBOARD -->
+      <section id="dashboard" class="section hidden">
+        <header class="dashboard-header">
+          <div>
+            <h2 id="welcome">خوش آمدید</h2>
+            <p id="username" class="username-display"></p>
+          </div>
+          <button id="logoutBTN" data-section="logout" class="btn btn--outline">خروج</button>
+        </header>
+
+        <div class="dashboard-content">
+          <!-- CHARTS -->
+          <div class="charts-wrapper">
+            <h3>تراکنش‌های هفتگی</h3>
+            <div class="chart-card large">
               <canvas id="weeklyTransactionsChart"></canvas>
             </div>
-          </div>
-
-          <div id="balanceChart" >
-            <div class="chart-container small">
+            <h3>موجودی حساب‌ها</h3>
+            <div class="chart-card small">
               <canvas id="balancePieChart"></canvas>
             </div>
           </div>
 
-        </div>
+          <!-- ACCOUNTS & TRANSACTIONS -->
+          <div class="panels">
+            <div class="panel accounts">
+              <h3>حساب‌های شما</h3>
+              <label for="accountList"> </label>
+              <select id="accountList" class="accountList"></select>
+              <div id="accountDetails" class="account-details"></div>
+            </div>
 
-        <div class="dashboard-content">
-          <div class="accounts-panel select-container">
-            <h3>💳 حساب‌های شما</h3>
-            <label for="accountList"> انتخاب حساب:</label>
-            <select id="accountList" class="account-list accountList"></select>
+            <br />
 
-            <div id="accountDetails" class="account-details"></div>
-          </div>
-
-          <div class="transactions-panel">
-            <h3>📜 تراکنش‌ها</h3>
-            <div class="transaction-list"></div>
+            <div class="panel transactions">
+              <h3>تراکنش‌ها</h3>
+              <br />
+              <div class="transaction-list"></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="accounts" class="hidden accounts-section">
+      <!-- SECTION: ACCOUNTS -->
+      <section id="accounts" class="section hidden">
         <h2 class="section-title">مدیریت حساب‌ها</h2>
-
-        <!-- انتخاب حساب -->
-        <div class="account-select">
-          <label for="accountList">انتخاب حساب:</label>
+        <br>
+        <div class="form-group">
+          <label>انتخاب حساب</label>
           <select id="acc-sc-accountList" class="accountList"></select>
         </div>
-
-        <!-- اطلاعات حساب -->
-        <div id="account-info" class="account-info">
-          یک حساب را انتخواب کنید
-        </div>
         <br />
-
-        <!-- دکمه‌های کنترل -->
-        <div class="account-actions">
-          <button id="createBankAccountBtn" class="create-btn">
-            ➕ ساخت حساب جدید
+        <div id="account-info" class="account-info">یک حساب را انتخاب کنید</div>
+        <br />
+        <div class="actions">
+          <button id="createBankAccountBtn" class="btn btn--primary">
+            ➕ حساب جدید
           </button>
-          <button id="deleteBankAccountBtn" class="delete-btn">
-            🗑️ حذف حساب
+          <button id="deleteBankAccountBtn" class="btn btn--danger">
+            🗑 حذف حساب
           </button>
         </div>
       </section>
 
-      <section id="agreeDeleteBankAccount">
-        <span id="showDLTAccountDescription"> </span>
-        <div class="account-actions">
-          <button id="agreeDeleteBankAccountBtn" class="delete-btn">
-            🗑️ حذف حساب
+      <!-- SECTION: AGREE DELETE -->
+      <section id="agreeDeleteBankAccount" class="section hidden">
+        <div id="showDLTAccountDescription"></div>
+        <div class="actions">
+       
+          <button id="agreeDeleteBankAccountBtn" class="btn btn--danger">
+            حذف حساب
           </button>
-          <button id="cancelDeleteBankAccountBtn" class="cancel-btn">
+          <button id="cancelDeleteBankAccountBtn" class="btn btn--outline">
             انصراف
           </button>
         </div>
       </section>
 
-      <section id="createBankAccount" class="create-account-section">
-        <h2 class="section-title">ساخت حساب جدید</h2>
-
-        <form id="createBankAccountForm" class="create-account-form">
+      <!-- SECTION: CREATE BANK ACCOUNT -->
+      <section id="createBankAccount" class="section hidden">
+        <h2>ساخت حساب جدید</h2>
+        <form id="createBankAccountForm" class="form">
           <div class="form-group">
-            <label for="accountType">نوع حساب</label>
+            <label>نوع حساب</label>
             <select id="accountType" required>
               <option value="saving">پس‌انداز</option>
               <option value="checking">جاری</option>
             </select>
           </div>
-
           <div class="form-group">
-            <label for="initialBalance">موجودی اولیه (تومان)</label>
+            <label>موجودی اولیه (تومان)</label>
             <input
               type="number"
               id="initialBalance"
-              step="1000"
               min="1000"
-              placeholder=" مبلغ سپرده"
+              step="1000"
+              placeholder="مبلغ سپرده"
               required
             />
           </div>
-
-          <button type="submit" class="createbtn create-btn">ایجاد حساب</button>
+          <button type="submit" class="btn btn--primary">ایجاد حساب</button>
         </form>
-        -
       </section>
 
-      <section id="transactions" class="transactions hidden">
+      <!-- SECTION: TRANSACTIONS -->
+      <section id="transactions" class="section hidden">
         <h2>تمام تراکنش‌ها</h2>
-        <div id="transactionList">
-          <span style="color: rgb(173, 60, 60)"
-            >اول یک حساب را انتخواب کنید</span
-          >
-        </div>
+        <br>
+        <div id="transactionList" class="transaction-list"></div>
       </section>
 
-      <section id="transfer" class="active section">
+      <!-- SECTION: TRANSFER -->
+      <section id="transfer" class="section hidden">
         <h2>🔁 انتقال وجه</h2>
-
-        <form id="transferForm" class="transfer-form">
+        <br>
+        <form id="transferForm" class="form">
           <div class="form-group">
-            <label for="fromAccount">از حساب:</label>
-            <select
-              id="fromAccount"
-              class="fromAccountList"
-              name="fromAccount"
-              required
-            ></select>
+            <label>از حساب</label>
+            <select id="fromAccount" class="fromAccountList" required></select>
           </div>
-
           <div class="form-group">
-            <label for="toAccount">به حساب:</label>
-            <select
-              id="toAccount"
-              name="toAccount toAccountList"
-              required
-            ></select>
+            <label>به حساب</label>
+            <select id="toAccount" class="toAccountList" required></select>
           </div>
-
           <div class="form-group">
-            <label for="amount">مبلغ انتقال (تومان):</label>
+            <label>مبلغ (تومان)</label>
             <input
               type="number"
               id="amount"
@@ -256,21 +231,36 @@
               required
             />
           </div>
-
-          <button type="submit" class="btn">انتقال</button>
-
-          <p id="transferMsg"></p>
+          <button type="submit" class="btn btn--primary">انتقال</button>
+          <p id="transferMsg" class="muted"></p>
         </form>
+      </section>
 
-        <p id="transferMessage" class="message"></p>
+      <section id="logout" class=" hidden logout-section">
+        <div class="logout-card">
+          <h2 class="section-title">خروج از حساب کاربری</h2>
+          <br>
+          <p class="logout-message">
+            آیا مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟
+          </p>
+
+          <div class="logout-actions">
+            <br>
+            <button id="logoutBtn" class="logout-btn">🚪 خروج از حساب</button>
+            <button data-section="dashboard" class="cancelLogoutBtn">
+              بازگشت به داشبورد
+            </button>
+          </div>
+        </div>
       </section>
     </main>
 
-    <!--  Footer -->
-    <footer>
+    <!-- FOOTER -->
+    <footer class="app-footer">
       <p>© 2025 MyBank | کلیه حقوق محفوظ است</p>
     </footer>
 
+    <!-- MAIN JS -->
     <script type="module" src="scripts/main.js"></script>
   </body>
 </html>

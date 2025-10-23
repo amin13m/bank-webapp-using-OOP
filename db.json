@@ -29,7 +29,8 @@
     {
       "id": "1",
       "username": "Ali",
-      "password": "1234"
+      "password": "1234",
+      "age": "34"
     },
     {
       "id": "2",
@@ -84,14 +85,14 @@
     {
       "id": "AC_20259171283656",
       "owner": "Ali",
-      "balence": 10280,
+      "balence": 11880,
       "bankId": "ba5",
       "_type": "SavingAccount"
     },
     {
       "id": "AC_202591712845949",
       "owner": "ahmad",
-      "balence": 15570,
+      "balence": 17570,
       "bankId": "ba1",
       "_type": "CheckingAccount"
     },
@@ -113,7 +114,22 @@
       "id": "AC_202591712913203",
       "owner": "Ali",
       "userID": "ac1",
-      "balence": 8460,
+      "balence": 7760,
+      "bankId": "ba5",
+      "_type": "CheckingAccount"
+    },
+    {
+      "id": "AC_20259227412035",
+      "owner": "Ali",
+      "balence": 3100,
+      "bankId": "ba5",
+      "_type": "CheckingAccount"
+    },
+    {
+      "id": "AC_202592391338564",
+      "owner": "ahmad reza",
+      "userID": "4a34",
+      "balence": 19800,
       "bankId": "ba5",
       "_type": "CheckingAccount"
     }
@@ -421,6 +437,86 @@
       "toID": "AC_202591712845949",
       "amount": 1400,
       "date": "2025-10-21T18:52:25.437Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_20259225107358",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_20259171283656",
+      "amount": 300,
+      "date": "2025-10-22T12:10:07.358Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592273914252",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_202591712845949",
+      "amount": 100,
+      "date": "2025-10-22T14:39:14.252Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_20259227423997",
+      "fromID": "AC_20259227412035",
+      "toID": "AC_202591712845949",
+      "amount": 1400,
+      "date": "2025-10-22T14:42:03.997Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592275313581",
+      "fromID": "AC_20259171283656",
+      "toID": "AC_202591712845949",
+      "amount": 200,
+      "date": "2025-10-22T14:53:13.581Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592275332635",
+      "fromID": "AC_20259227412035",
+      "toID": "AC_20259171283656",
+      "amount": 500,
+      "date": "2025-10-22T14:53:32.635Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592211204387",
+      "fromID": "AC_20259171283656",
+      "toID": "AC_202591712845949",
+      "amount": 200,
+      "date": "2025-10-22T18:20:43.087Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592211237215",
+      "fromID": "AC_2025922112244807",
+      "toID": "AC_20259171283656",
+      "amount": 800,
+      "date": "2025-10-22T18:23:07.215Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592391939384",
+      "fromID": "AC_202592391338564",
+      "toID": "AC_20259171283656",
+      "amount": 200,
+      "date": "2025-10-23T16:19:39.384Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_20259239500351",
+      "fromID": "AC_20259171283656",
+      "toID": "AC_202591712845949",
+      "amount": 100,
+      "date": "2025-10-23T16:50:00.351Z",
+      "_type": "Transaction"
+    },
+    {
+      "id": "TA_202592395029558",
+      "fromID": "AC_202591712913203",
+      "toID": "AC_20259171283656",
+      "amount": 300,
+      "date": "2025-10-23T16:50:29.558Z",
       "_type": "Transaction"
     }
   ]

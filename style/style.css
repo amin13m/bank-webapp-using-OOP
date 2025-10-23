@@ -1,756 +1,126 @@
-:root {
-  --primary: #004b8d;
-  --secondary: #e6f0fa;
-  --text: #333;
-  --white: #fff;
-  --radius: 10px;
+
+
+
+
+
+
+
+
+/* 🌈 Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "IRANSans", "Vazirmatn", sans-serif;
 }
 
 body {
-  font-family: "Vazirmatn", sans-serif;
-  margin: 0;
-  background-color: var(--secondary);
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
+  color: #fff;
+ 
   min-height: 100vh;
-}
-/* 
-/* --- Header --- */
-
-header {
-  position: relative;
+  overflow-x: hidden;
+  transition: background 0.4s ease;
 }
 
-.app-header {
-  background: var(--primary);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  padding-left: 10px;
-  position: sticky;
-  top: 0px;
-  z-index: 10;
-  border-bottom: #ffffff00 1px solid;
-  box-shadow: 0 2px 6px rgba(0, 100, 200, 0.637);
-
-  .logo {
-    font-size: 1.3rem;
-    font-weight: bold;
-  }
-
-  .nav {
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px;
-    margin: 0;
-
-    button {
-      background: none;
-      border: 0;
-      border-radius: 5px;
-      padding: 5px 10px;
-      color: var(--white);
-      cursor: pointer;
-      font-size: 1rem;
-      max-width: 130px;
-    }
-    .bouldBorder {
-      color: white;
-      border: 2px solid var(--white);
-      border-radius: 6px;
-      padding: 5px 10px;
-      margin-left: 0;
-    }
-    button:hover {
-      font-weight: 500;
-      background-color: #00b3db00;
-      color: #00b4db;
-    }
-    #username {
-      padding: 0;
-      margin: 0;
-      margin: auto auto;
-      font-size: 25px;
-      color: var(--white);
-      width: 30px;
-      height: 30px;
-      border: 4px solid var(--white);
-      border-radius: 50%;
-      overflow: hidden;
-      position: relative;
-      bottom: -5px;
-      padding: -9px;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-}
-
-.navbar button {
-  position: relative;
-  text-decoration: none;
-  color: #1f2a44;
-  font-weight: 500;
-  padding: 4px 0;
-  transition: color 0.3s ease;
-}
-
-/* نوار آبی زیر هر لینک */
-.navbar button::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.35s ease;
-  border-radius: 2px;
-  opacity: 0.8;
-}
-
-/* افکت hover */
-.navbar button:hover {
-  color: #0078d7;
-}
-
-.navbar button:hover::after {
-  transform: scaleX(1);
-}
-
-/* scroll progress */
-
+/* 🌟 Scroll Progress */
 #scroll-progress {
   position: fixed;
   top: 0;
-  left: 0;
-  height: 6px;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6a5acd, #00c6ff);
   width: 0%;
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-  box-shadow: 0 0 6px rgba(0, 150, 255, 0.4);
-  border-radius: 0 4px 4px 0;
-  transition: width 0.1s linear;
-  z-index: 9999;
+  z-index: 999;
+  transition: width 0.25s linear;
 }
 
-/* dashboard */
-#dashboard {
-  display: none;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
-  font-family: "Vazirmatn", sans-serif;
-  background: linear-gradient(145deg, #f0f4f8, #e3e9ee);
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-
-  /* افکت دکوری زیبا با before و after */
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
-    z-index: 0;
-  }
-
-  &::before {
-    top: -50px;
-    left: -50px;
-    width: 200px;
-    height: 200px;
-    background: #4f8ef7;
-  }
-
-  &::after {
-    bottom: -80px;
-    right: -60px;
-    width: 300px;
-    height: 300px;
-    background: #36d7b7;
-  }
-
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2;
-
-    h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #1b2a4e;
-      position: relative;
-
-      /* افکت خط زیر اسم */
-      &::after {
-        content: "";
-        display: block;
-        width: 80px;
-        height: 3px;
-        background: #4f8ef7;
-        border-radius: 2px;
-        margin-top: 5px;
-      }
-    }
-
-    button {
-      padding: 0.6rem 1.2rem;
-      border: none;
-      background: #ff5a5f;
-      color: white;
-      font-weight: 500;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease-in;
-
-      &:hover {
-        background: #e04848;
-        transform: scale(1.05);
-      }
-    }
-  }
-
-  .dashboard-content {
-      border-radius: 16px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.116);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    z-index: 2;
-
-    @media (max-width: 800px) {
-      grid-template-columns: 1fr;
-    }
-    .accounts-panel,
-    .transactions-panel {
-      width: 90%;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-      position: relative;
-      overflow: hidden;
-
-      /* افکت حاشیه رنگی تزئینی */
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 6px;
-        height: 100%;
-        background: linear-gradient(to bottom, #4f8ef7, #36d7b7);
-      }
-
-      h3 {
-        font-size: 1.2rem;
-        color: #34495e;
-        margin-bottom: 1rem;
-      }
-
-      .transaction-card {
-        position: relative;
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-        padding: 20px;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        cursor: pointer;
-      }
-
-      h3.wisdraw {
-        color: #ff5a5f;
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-      }
-
-      h3.diposit {
-        color: #36d7b7;
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-      }
-
-      /* نوار پایین با گرادیان زیبا */
-      .transaction-card::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 6px;
-        background: linear-gradient(90deg, #00b4db, #0083b0);
-        transition: height 0.4s ease, opacity 0.4s ease;
-        opacity: 0.8;
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
-      }
-
-      /* افکت hover برای عمق و رنگ */
-      .transaction-card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 8px 18px rgba(0, 150, 255, 0.25);
-      }
-
-      /* نوار گرادیان در hover بلندتر و پررنگ‌تر می‌شود */
-      .transaction-card:hover::after {
-        height: 100%;
-        opacity: 0.15;
-        background: linear-gradient(180deg, #00b4db, #0083b0);
-      }
-
-      /* متن و ساختار داخلی */
-      .transaction-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        color: #222;
-      }
-
-      .amount {
-        color: #0078d7;
-      }
-
-      .transaction-date {
-        color: #777;
-        font-size: 0.85rem;
-        margin-top: 8px;
-      }
-    }
-
-    .account-list,
-    .transaction-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-
-      .account-item,
-      .transaction-item {
-        background: #f8fafc;
-        padding: 1rem;
-        border-radius: 12px;
-        transition: all 0.2s ease;
-        position: relative;
-
-        select {
-          margin-right: auto;
-          margin-left: auto;
-        }
-
-        &:hover {
-          background: #eef3f9;
-          transform: translateY(-2px);
-        }
-
-        h4 {
-          color: #2c3e50;
-          margin-bottom: 0.4rem;
-        }
-
-        p {
-          color: #576574;
-          margin: 0;
-        }
-
-        small {
-          color: #95a5a6;
-        }
-      }
-    }
-  }
-
-  /* dashboard charts */
-
-  #charts {
-   display: grid;
-   gap: 1rem;
-   grid-template-columns: max-content;
-   grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-   
-      border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.164);
-  }
-
-  .dashboard-charts {
-    display: flex;
-    justify-content: space-between;
-
-    .chart-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem;
-      background: white;
-
-      flex: 1 1 300px; /* responsive */
-      width: 300px;
-      
-
-      h3 {
-        margin-bottom: 1rem;
-        font-size: 1.1rem;
-        color: #2d3748;
-      }
-    }
-    canvas {
-      max-width: 100%;
-    }
-  }
-
-  .chart-container.small {
-   
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-
-    canvas {
-      width: auto;
-      background: white;
-
-      width: 250px;
-      height: 250px;
-    
-      flex: 1 1 300px; /* responsive */
-      height: 150px;
-    }
-
-  .chart-container.small::before {
-    content: "موجودی حساب‌ها";
-    position: relative;
-    top: -25px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: #3498db;
-    font-weight: bold;
-    font-size: 14px;
-  }
-}
-  @media (min-width: 769px) {
-    #charts {
-      flex-direction: row; 
-      padding: 60px;
-    }
-
-    .dashboard-charts {
-      height: 300px;
-      width: 300px;
-      .chart-card {
-        flex: 1 1 300px;
-        
-      }
-      .chart-container.small{
- width: 80%;
-    height: 80%;
-      }
-    }
-  }
-
-
-@media (max-width: 769px) {
-        #charts {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-  
-
-  #balanceChart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-
-
-
-  }
-
-  #charts.hidden{
-    overflow: hidden;
-    display: none;
-  }
-/* transactions section */
-
-:root {
-  --blue1: #00b4db;
-  --blue2: #0083b0;
-  --light-bg: #f9fcff;
-  --text-dark: #1f2a44;
-}
-
-.select-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* 🧭 Header / Sidebar */
+header.app-header {
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 260px;
-  font-family: "IRANSans", sans-serif;
-  direction: rtl;
-}
-
-.select-container label {
-  color: var(--text-dark);
-  font-weight: 600;
-}
-
-.select-container select {
-  background: var(--light-bg);
-  border: 2px solid #d1e3ff;
-  border-radius: 12px;
-  padding: 12px 16px;
-  font-size: 0.95rem;
-  color: var(--text-dark);
-  outline: none;
-  cursor: pointer;
-  transition: all 0.35s ease;
-  box-shadow: 0 3px 8px rgba(0, 100, 255, 0.1);
-  appearance: none;
-  position: relative;
-}
-
-/* گرادیان و انیمیشن هنگام hover/focus */
-.select-container select:hover,
-.select-container select:focus {
-  border-color: var(--blue1);
-  box-shadow: 0 6px 16px rgba(0, 150, 255, 0.25);
-  transform: translateY(-3px);
-}
-
-/* فلش سفارشی */
-.select-container {
-  position: relative;
-}
-
-.select-container::after {
-  content: "▾";
-  position: absolute;
-  left: 14px;
-  top: 42px;
-  color: var(--blue2);
-  font-size: 1rem;
-  pointer-events: none;
-  transition: transform 0.3s ease;
-}
-
-.select-container select:focus + ::after {
-  transform: rotate(180deg);
-}
-
-/* 🔥 استایل‌دهی خود option ها */
-.select-container select option {
-  text-align: right;
-  background: linear-gradient(90deg, var(--blue1), var(--blue2));
-  color: #2c2c2c;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
-
-/* افکت hover برای option‌ها در برخی مرورگرها */
-.select-container select option:hover {
-  background: linear-gradient(90deg, #37ecba, #72afd3);
-}
-
-/* استایل خاص برای گزینه انتخاب‌شده (در مرورگرهایی که پشتیبانی می‌کنند) */
-.select-container select option:checked {
-  background: linear-gradient(90deg, #004e92, #000428);
-  font-weight: 600;
-}
-
-/* استایل select مربوط به انتخاب حساب */
-
-.select-container {
+  height: 100vh;
+  background: rgba(20, 20, 40, 0.45);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  width: 250px;
-  font-family: "IRANSans", sans-serif;
-  width: 300px;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  transition: transform 0.4s ease;
 }
 
-/* برچسب */
-.select-container label {
-  color: #333;
-  font-weight: 600;
+header .logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* استایل اصلی select */
-.select-container select {
-  background: #ffffff;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-size: 0.95rem;
-  color: #333;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.35s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  appearance: none;
-  position: relative;
-  z-index: 1;
-}
-
-/* نوار گرادیان پایین (شبه‌عنصر) */
-.select-container select::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 5px;
-  width: 100%;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-/* افکت hover و focus */
-.select-container select:hover,
-.select-container select:focus {
-  border-color: #00aaff;
-  box-shadow: 0 6px 16px rgba(0, 150, 255, 0.2);
-  transform: translateY(-3px);
-}
-
-/* شبیه افکت روشن شدن پایین */
-.select-container select:hover::after,
-.select-container select:focus::after {
-  opacity: 1;
-  height: 100%;
-  background: linear-gradient(180deg, #00b4db, #0083b0);
-}
-
-/* گزینه‌های داخلی */
-.select-container option {
-  background-color: #ffffff;
-  color: #333;
-}
-
-/* برای حذف فلش پیش‌فرض و افزودن فلش سفارشی */
-.select-container {
-  position: relative;
-}
-
-.select-container::after {
-  content: "▾";
-  position: absolute;
-  right: 14px;
-  top: 40px;
-  color: #007acc;
-  font-size: 1rem;
-  pointer-events: none;
-  transition: transform 0.3s ease;
-}
-
-.select-container select:focus + ::after {
-  transform: rotate(180deg);
-}
-
-#dashboard.active {
+header .nav {
   display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
 }
 
-/* --- Main --- */
-
-main {
-  flex: 1;
-  padding: 2rem;
-}
-
-section {
-  display: none;
-  animation: fadeIn 0.3s ease;
-}
-
-section.active {
-  display: block;
-}
-
-/* کارت‌های نمایش حساب */
-#accountsList,
-#transactionsList {
-  display: grid;
-  gap: 1rem;
-}
-
-.account-card,
-.transaction-card {
-  background: var(--white);
-  padding: 1rem;
-  border-radius: var(--radius);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.account-card:hover {
-  transform: scale(1.02);
-}
-
-/* --- Footer --- */
-footer {
+header .nav button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
   text-align: center;
-  padding: 1rem;
-  background: var(--primary);
-  color: var(--white);
+  transition: all 0.3s ease;
 }
 
-/* --- انیمیشن --- */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+header .nav button:hover,
+header .nav button.active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
 }
 
+header .bouldBorder {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 🍔 Hamburger Button */
 .menu-btn {
   display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1200;
+  font-size: 1.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem;
+  color: white;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
-/* --- ریسپانسیو موبایل --- */
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-    flex-direction: column;
-    background: var(--primary);
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
+
+.menu-btn:hover {
+  transform: rotate(90deg);
+}
+
+/* 📱 Responsive Sidebar */
+@media (max-width: 992px) {
+  header.app-header {
+    transform: translateX(100%);
+    position: fixed;
+    width: 240px;
+    height: 100%;
   }
 
-  .menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--white);
-  }
-
-  .nav.active {
-    display: flex;
+  header.app-header.active {
+    transform: translateX(0);
   }
 
   .menu-btn {
@@ -758,480 +128,308 @@ footer {
   }
 
   main {
-    padding: 1rem;
-  }
-
-  #accountsList,
-  #transactionsList {
-    grid-template-columns: 1fr;
+    margin-right: 0 !important;
   }
 }
 
-.section {
+
+
+
+
+/* Hamburger Button Animation */
+.menu-btn {
   display: none;
-  padding: 20px;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1200;
+  font-size: 1.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem;
+  color: white;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
 
-.section.active {
-  display: block;
+.menu-btn:hover {
+  transform: rotate(90deg);
 }
 
-.transfer-form {
-  max-width: 400px;
-  margin: auto;
-  background: #f9fafb;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+/* Sidebar hidden by default on mobile */
+@media (max-width: 992px) {
+  header.app-header {
+    transform: translateX(100%);
+  }
+
+  header.app-header.active {
+    transform: translateX(0%);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  }
+
+  main {
+    margin-right: 0 !important;
+  }
+
+  .menu-btn {
+    display: block;
+  }
 }
 
-.form-group {
-  margin-bottom: 16px;
+.menu-btn.open {
+  transform: rotate(45deg);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* 🖥️ Main Layout */
+main {
+  margin-right: 260px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+  transition: all 0.4s ease;
 }
 
-label {
-  font-weight: 600;
-  margin-bottom: 6px;
+section {
+  display: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+section.active {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 💳 Dashboard Styles */
+
+
+#dashboard.active{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.charts-wrapper{
+  display: none;
+}
+
+.charts-wrapper.active{
+  display: inline;
+}
+
+.chart-container {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  transform: scale(1.03);
+}
+
+.chart-card.large{
+  height: 270px;
+}
+
+.chart-card.small{
+  height: 230px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card.large,
+  .chart-card.small {
+    height: auto;
+    min-height: 220px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  
+}
+
+/* 💸 Account & Transaction Panels */
+.accounts-panel,
+.transactions-panel {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.accounts-panel:hover,
+.transactions-panel:hover {
+  transform: translateY(-4px);
+}
+
+
+
+/*  Transaction Cards */
+.transaction-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
+
+
+.transaction-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.transaction-header h3 {
+  font-size: 1rem;
+}
+
+.transaction-card .amount {
+  font-weight: bold;
+}
+
+
+.wisdraw{
+  color: #f44336;
+}
+.diposit{
+  color: #4CAF50;
+}
+
+/* 🧾 Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.3rem;
+  display: block;
+  font-size: 0.9rem;
 }
 
 input,
 select {
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-.btn {
-  background: #0077ff;
-  color: white;
+  padding: 0.8rem;
   border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
-  width: 100%;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  background: #005fd4;
-}
-
-.message {
-  text-align: center;
-  margin-top: 12px;
-  font-weight: 500;
-}
-
-@media (max-width: 500px) {
-  .transfer-form {
-    width: 90%;
-  }
-}
-
-/* --- ریسپانسیو دسکتاپ --- */
-@media (min-width: 769px) {
-  #accountsList,
-  #transactionsList {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  #dashboard select {
-    width: 300px;
-    padding: 0.5rem;
-  }
-}
-
-section {
-  text-align: center;
-}
-
-.login-form {
-  max-width: 400px;
-  margin: auto;
-  background: #f9fafb;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.create-account-form {
-  max-width: 400px;
-  margin: auto;
-  background: #f9fafb;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* --- accounts--- */
-
-.accounts-section {
-  background: #f7faff;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 130, 255, 0.1);
-  padding: 30px;
-  margin: 40px auto;
-  max-width: 600px;
-  transition: all 0.4s ease;
-  font-family: "IRANSans", sans-serif;
-}
-
-.section-title {
-  font-size: 1.6rem;
-  color: #1f3b73;
-  margin-bottom: 20px;
-  text-align: center;
-  position: relative;
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-  animation: titleGlow 2s infinite alternate;
-}
-
-@keyframes titleGlow {
-  from {
-    box-shadow: 0 0 6px rgba(0, 160, 255, 0.4);
-  }
-  to {
-    box-shadow: 0 0 12px rgba(0, 160, 255, 0.7);
-  }
-}
-
-/* انتخاب حساب */
-.account-select {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 25px;
-  gap: 8px;
-}
-
-.account-select label {
-  font-weight: 600;
-  color: #1f2a44;
-}
-
-.account-select select {
-  padding: 10px 12px;
-  border: 2px solid #cce4ff;
-  border-radius: 10px;
-  background: white;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.account-select select:hover {
-  border-color: #0083b0;
-  box-shadow: 0 0 8px rgba(0, 131, 176, 0.3);
-}
-
-/* اطلاعات حساب */
-.account-info {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 130, 255, 0.08);
-  margin-bottom: 25px;
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.4s ease;
-}
-
-.account-info.hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-}
-
-.info-box p {
-  margin: 10px 0;
-  color: #333;
-}
-
-.info-box strong {
-  color: #0078d7;
-}
-
-/* دکمه‌ها */
-.account-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.account-actions button {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-
-.create-btn {
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-  color: white;
-}
-
-.create-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 130, 255, 0.25);
-}
-
-.delete-btn {
-  background: #ffe3e3;
-  color: #c0392b;
-}
-
-.delete-btn:hover {
-  background: #ffcccc;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(192, 57, 43, 0.25);
-}
-
-/* create account */
-
-.create-account-section {
-  background: #f8fbff;
-  border-radius: 18px;
-  padding: 30px 40px;
-  margin: 40px auto;
-  max-width: 500px;
-  box-shadow: 0 8px 25px rgba(0, 140, 255, 0.08);
-  transition: all 0.4s ease;
-  font-family: "IRANSans", sans-serif;
-}
-
-.create-account-section:hover {
-  box-shadow: 0 12px 28px rgba(0, 140, 255, 0.15);
-}
-
-/* عنوان */
-.section-title {
-  font-size: 1.5rem;
-  color: #1f3b73;
-  text-align: center;
-  margin-bottom: 25px;
-  position: relative;
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  border-radius: 6px;
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-}
-
-/* فرم */
-.create-account-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* گروه‌های ورودی */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  position: relative;
-}
-
-.form-group label {
-  font-weight: 600;
-  color: #1f2a44;
-  font-size: 0.95rem;
-}
-
-.form-group input,
-.form-group select {
-  padding: 12px 14px;
-  border: 2px solid #d3e7ff;
   border-radius: 12px;
-  background: white;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #00b4db;
-  box-shadow: 0 0 10px rgba(0, 179, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
   outline: none;
-}
-
-/* دکمه ایجاد حساب */
-.create-btn {
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 14px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 131, 176, 0.2);
 }
 
-.create-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0, 131, 176, 0.35);
+input:focus,
+select:focus {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-/* انیمیشن نمایشی */
-@keyframes fadeInForm {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.create-account-form {
-  animation: fadeInForm 0.6s ease forwards;
-}
-
-/* transaction card */
-
-.tx-card {
-  width: 320px;
-  background: linear-gradient(180deg, #ffffff, #f6fbff);
-  border-radius: 12px;
-  padding: 14px;
-  box-shadow: 0 8px 24px rgba(3, 100, 200, 0.08);
-  font-family: "IRANSans", system-ui, -apple-system, "Segoe UI", Roboto;
-  color: #123;
-}
-
-.tx-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.tx-header h4 {
-  margin: 0;
-  font-size: 1rem;
-  color: #0b3a66;
-}
-.tx-sub {
-  font-size: 0.84rem;
-  color: #5b6b80;
-}
-
-.tx-stats {
-  font-weight: 700;
-  color: #0a84ff;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 180, 219, 0.12),
-    rgba(0, 131, 176, 0.06)
-  );
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-}
-
-.tx-chart-wrap {
-  position: relative;
-  height: 80px;
-  width: 100%;
-}
-
-/* SVG full size */
-#txSpark {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* مسیر نمودار */
-.path-line {
-  fill: none;
-  stroke: url(#g); /* gradient via defs */
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 4px 10px rgba(3, 100, 200, 0.12));
-  transition: stroke 0.25s ease;
-}
-
-/* پر کردن زیر نمودار با گرادیان ملایم */
-.path-fill {
-  fill: url(#gFill);
-  opacity: 0.18;
-}
-
-/* نقاط روی نمودار */
-.dot {
-  fill: white;
-  stroke: #0a84ff;
-  stroke-width: 1.6;
-  r: 3;
-  transition: transform 0.12s ease;
-}
-
-/* tooltip */
-.tx-tooltip {
-  position: absolute;
-  pointer-events: none;
-  background: #0b3a66;
+/* 🟣 Buttons */
+button,
+.btn {
+  cursor: pointer;
+  padding: 0.8rem 1.2rem;
+  border-radius: 14px;
+  border: none;
   color: #fff;
-  padding: 6px 8px;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  transform: translate(-50%, -120%);
-  white-space: nowrap;
-  box-shadow: 0 6px 18px rgba(3, 100, 200, 0.18);
-  opacity: 0;
-  transition: opacity 0.12s ease;
+  background: linear-gradient(135deg, #6a5acd, #00c6ff);
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.tx-tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #0b3a66;
-}
-
-.cancel-btn {
-  background: linear-gradient(90deg, #00b4db, #0083b0);
-  color: white;
-}
-
-.cancel-btn:hover {
+button:hover,
+.btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 130, 255, 0.25);
+  opacity: 0.9;
+}
+
+/* 🧊 Info Box */
+.info-box {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  line-height: 1.8;
+}
+
+/* 🦶 Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.bg-canvas {
+  position: fixed;      
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;          
+}
+
+
+
+/* select style */
+
+select {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  border: none;
+}
+
+option {
+  background: rgba(30, 30, 60, 0.95);
+  color: #fff;
 }

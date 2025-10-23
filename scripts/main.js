@@ -4,6 +4,7 @@ import { Events } from "./events.js";
 import { UI } from "./ui.js";
 import { Auth } from "../models/Auth.js";
 import { Charts } from "./chart.js";
+import { bgAnimation } from "./bgAnimation.js";
 
 
 document.addEventListener("DOMContentLoaded",
@@ -24,6 +25,8 @@ document.addEventListener("DOMContentLoaded",
 
       UI.init()
       Events.init()
+
+      bgAnimation.renderBgAnimation()
 
       console.log("app ready")
 

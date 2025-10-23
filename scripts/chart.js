@@ -9,7 +9,7 @@ export class Charts {
   constructor() {}
   static async renderWeeklyChart(userId) {
     if (Charts.curentChart === undefined)
-      document.querySelector(".dashboard-charts").style.display = "flex";
+      document.querySelector(".chart-card").style.display = "flex";
 
     const ctx = document
       .getElementById("weeklyTransactionsChart")
@@ -100,7 +100,7 @@ const gradientBlue = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
         scales: {
           x: {
             ticks: {
-              color: "#666",
+              color: "#f8f6f6ff",
               font: (ctx) => ({
                 size: Math.max(10, ctx.chart.width / 60),
                 family: "Vazirmatn, sans-serif",
@@ -108,24 +108,30 @@ const gradientBlue = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
               maxRotation: 0,
               autoSkip: true,
             },
+             grid: {
+                    color: "rgba(255, 255, 255, 0.3)" // رنگ خطوط عمودی
+                }
           },
           y: {
             beginAtZero: true,
             ticks: {
-              color: "#444",
+              color: "#f8f6f6ff",
               font: (ctx) => ({
                 size: Math.max(10, ctx.chart.height / 40),
                 family: "Vazirmatn, sans-serif",
               }),
               callback: (v) => v.toLocaleString() + " ریال",
             },
+            grid: {
+                    color: "rgba(255, 255, 255, 0.3)" // رنگ خطوط افقی
+                }
           },
         },
         plugins: {
           legend: {
             position: "top",
             labels: {
-              color: "#333",
+              color: "#f8f6f6ff",
               font: (ctx) => ({
                 size: Math.max(11, ctx.chart.width / 70),
                 family: "Vazirmatn, sans-serif",
@@ -238,7 +244,7 @@ const gradientBlue = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
   
 
   static async renderBalancePie() {
-    document.querySelector("#charts")
+    document.querySelector("#balancePieChart")
       .classList.remove("hidden");
 
     const ctx = document.getElementById("balancePieChart").getContext("2d");
@@ -298,9 +304,10 @@ const gradientBlue = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
           legend: {
             position: "right",
             labels: {  
-                font: { family: "IRANSans", size: 10 } ,
+                font: { family: "IRANSans", size: 10 ,color :"#f8f6f6ff" } ,
                 usePointStyle: true, 
                 pointStyle: 'circle', //  دایره‌ای ('rect', 'triangle', 'rectRounded', 'rectRot', 'cross', 'star', 'line')
+                color: "#f8f6f6ff"
             }
             
         },
