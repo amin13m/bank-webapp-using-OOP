@@ -9,7 +9,9 @@ A banking web application built using Object-Oriented Programming (OOP) principl
 
 📸 Sample UI Screenshots
 ![dashboard](https://github.com/user-attachments/assets/876b737d-6928-4709-81ab-d2f2038895ec)
-![mobile](https://github.com/user-attachments/assets/0e69183b-e391-425f-b304-387185db5e55)
+![mobile1](https://github.com/user-attachments/assets/a1a5d6ad-c946-494d-9a2a-e0e5078e64a4)
+![mobile2](https://github.com/user-attachments/assets/c32660b6-33a2-41f1-aaff-a7b7cc0f1c7e)
+
 
 ![transfer](https://github.com/user-attachments/assets/f91679a7-e1a5-4dc4-b9b5-81ff04a5ef0c)
 ![login](https://github.com/user-attachments/assets/e094faa3-e8c9-41eb-8d66-ac47e70d25ac)
