@@ -120,7 +120,7 @@ const gradientBlue = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
                 size: Math.max(10, ctx.chart.height / 40),
                 family: "Vazirmatn, sans-serif",
               }),
-              callback: (v) => v.toLocaleString() + " ریال",
+              callback: (v) => v.toLocaleString() + " تومان",
             },
             grid: {
                     color: "rgba(255, 255, 255, 0.3)" // رنگ خطوط افقی
